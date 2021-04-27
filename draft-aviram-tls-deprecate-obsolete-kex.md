@@ -64,18 +64,26 @@ independent of implementation choices, as well as problems that stem purely from
 the difficulty of implementing countermeasures correctly.
 
 At a rough glance, the problems affecting FFDH are as follows (TODO add citations to everything here):
+
 1. FFDH suffers from interoperability problems, because there is no mechanism for negotiating the group size, and some implementations only support small group sizes.
+
 2. In practice, operators use 1024 bit FFDH groups, since this is the maximum
 size that is widely supported. This leaves only a small security margin vs. the
 current discrete log record, which stands at 795 bits.
+
 3. Expanding on the previous point, a handful of very large computations would allow cheaply decrypting a relatively large fraction of FFDH traffic.
+
 4. FFDH suffers from the {{Raccoon}} side channel attack.
+
 5. FFDH groups may have small subgroups, which may enable several attacks.
 
 And the problems affecting RSA key exchange are as follows (should add citations to everything here):
+
 1. RSA key exchange offers no forward secrecy, by construction.
+
 2. RSA key exchange may be vulnerable to Bleichenbacher's attack. Experience
 shows that variants of this attack arise every few years, because implementing the relevant countermeasure correctly is difficult.
+
 3. In addition to the above point, there is no convenient mechanism in TLS for domain separation of keys. Therefore, a single endpoint that is vulnerable to Bleichenbacher's attack would affect all endpoints sharing the same RSA key.
 
 I guess the plan is to elaborate on each point in a full paragraph in the
@@ -89,7 +97,7 @@ Given these problems, this document updates {{!RFC4346}}, {{!RFC5246}}, {{!RFC41
 
 {::boilerplate bcp14}
 
-# Non-Ephemeral Diffie Hellman {#non-ephemeral}
+# RSA {#rsa}
 
 Clients and servers MUST NOT offer RSA cipher suites in TLS 1.0, 1.1, and 1.2
 connections. This includes all cipher suites listed in the following table.
@@ -100,9 +108,13 @@ TODO fix this
 |:-|:-|
 | TLS_DH_DSS_EXPORT_WITH_DES40_CBC_SHA | {{!RFC4346}} |
 
+# Non-Ephemeral Diffie Hellman {#non-ephemeral}
+
 Clients and servers MAY offer fully ephemeral FFDHE cipher suites in TLS 1.0,
 1.1, and 1.2 connections, under the following conditions:
+
 1. The secret DH key is fully ephemeral, that is a fresh DH exponent is generated for each TLS connection.
+
 2. The group is one of the following well-known groups described in {{!RFC7919}}:
 ffdhe2048, ffdhe3072, ffdhe4096, ffdhe6144, ffdhe8192.
 
