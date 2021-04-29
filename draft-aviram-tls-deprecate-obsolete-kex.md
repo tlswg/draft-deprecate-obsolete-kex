@@ -48,34 +48,40 @@ author:
 --- abstract
 
 This document deprecates the use of RSA key exchange in TLS, and limits the use
-of finite field Diffie Hellman key exchange such as to avoid known
+of Diffie Hellman key exchange over a finite field such as to avoid known
 vulnerabilities or improper security properties.
 
 --- middle
 
 # Introduction
 
-TLS supports a variety of key exchange algorithms, including RSA and finite
-field Diffie Hellman (henceforth, FFDH), as well as elliptic curve Diffie
-Hellman (ECDH). Recent years have brought to light several security concerns
-regarding FFDH key exchange that stem from implementation choices.
+TLS supports a variety of key exchange algorithms, including RSA and Diffie Hellman
+over a finite field, as well as elliptic curve Diffie Hellman (ECDH).
+Diffie Hellman key exchange, over any group, may use either long-lived or ephemeral
+secrets. Diffie Hellman key exchange with long-lived secrets over a finite field is
+already deprecated in deprecate-ffdh (TODO cite properly).
+This document focuses on Diffie Hellman over a finite field with ephemeral secrets
+(FFDHE), as well as RSA key exchange.
+
+Recent years have brought to light several security concerns
+regarding FFDHE key exchange that stem from implementation choices.
 Additionally, RSA key exchange suffers from security problems that are
 independent of implementation choices, as well as problems that stem purely from
 the difficulty of implementing countermeasures correctly.
 
-At a rough glance, the problems affecting FFDH are as follows (TODO add citations to everything here):
+At a rough glance, the problems affecting FFDHE are as follows (TODO add citations to everything here):
 
-1. FFDH suffers from interoperability problems, because there is no mechanism for negotiating the group size, and some implementations only support small group sizes.
+1. FFDHE suffers from interoperability problems, because there is no mechanism for negotiating the group size, and some implementations only support small group sizes.
 
-2. In practice, operators use 1024 bit FFDH groups, since this is the maximum
+2. In practice, operators use 1024 bit FFDHE groups, since this is the maximum
 size that is widely supported. This leaves only a small security margin vs. the
 current discrete log record, which stands at 795 bits.
 
-3. Expanding on the previous point, a handful of very large computations would allow cheaply decrypting a relatively large fraction of FFDH traffic.
+3. Expanding on the previous point, a handful of very large computations would allow cheaply decrypting a relatively large fraction of FFDHE traffic.
 
-4. FFDH suffers from the {{Raccoon}} side channel attack.
+4. When secrets are not fully ephemeral, FFDHE suffers from the {{Raccoon}} side channel attack.
 
-5. FFDH groups may have small subgroups, which may enable several attacks.
+5. FFDHE groups may have small subgroups, which may enable several attacks.
 
 And the problems affecting RSA key exchange are as follows (should add citations to everything here):
 
@@ -108,12 +114,13 @@ TODO fix this
 |:-|:-|
 | TLS_DH_DSS_EXPORT_WITH_DES40_CBC_SHA | {{!RFC4346}} |
 
-# Non-Ephemeral Diffie Hellman {#non-ephemeral}
+# Ephemeral Diffie Hellman {#dhe}
 
 Clients and servers MAY offer fully ephemeral FFDHE cipher suites in TLS 1.0,
 1.1, and 1.2 connections, under the following conditions:
 
 1. The secret DH key is fully ephemeral, that is a fresh DH exponent is generated for each TLS connection.
+Note that this requirement is also specified in deprecate-ffdh.
 
 2. The group is one of the following well-known groups described in {{!RFC7919}}:
 ffdhe2048, ffdhe3072, ffdhe4096, ffdhe6144, ffdhe8192.
@@ -125,6 +132,8 @@ TODO FIX
 | Ciphersuite  | Reference |
 |:-|:-|
 | TLS_ECDH_ECDSA_WITH_NULL_SHA | {{!RFC8422}} |
+
+Note that FFDH cipher suites are already deprecated in deprecate-ffdh.
 
 # IANA Considerations
 
