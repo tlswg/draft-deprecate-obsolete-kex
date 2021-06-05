@@ -39,12 +39,6 @@ author:
        organization:
        email: nimrod.aviram@gmail.com
 
- -
-       ins: C. Bartle
-       name: Carrick Bartle
-       organization: Apple, Inc.
-       email: cbartle@apple.com
-
 --- abstract
 
 This document deprecates the use of RSA key exchange in TLS, and limits the use
