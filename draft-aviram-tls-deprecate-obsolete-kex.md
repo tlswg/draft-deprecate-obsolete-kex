@@ -69,7 +69,7 @@ At a rough glance, the problems affecting FFDHE are as follows (TODO add citatio
 
 2. In practice, operators use 1024 bit FFDHE groups, since this is the maximum
 size that is widely supported. This leaves only a small security margin vs. the
-current discrete log record, which stands at 795 bits.
+current discrete log record, which stands at 795 bits. (TODO try to find an authoritative source)
 
 3. Expanding on the previous point, a handful of very large computations would allow cheaply decrypting a relatively large fraction of FFDHE traffic.
 
