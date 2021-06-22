@@ -31,6 +31,46 @@ informative:
       - ins: T. Jager
       - ins: J. Schwenk
       - ins: J. Somorovsky
+  deprecate-ffdh:
+    title: "Deprecating FFDH Ciphersuites in TLS"
+    target: https://datatracker.ietf.org/doc/draft-bartle-tls-deprecate-ffdhe/
+    date: 2021-06
+    author:
+      - ins: C. Bartle
+      - ins: N. Aviram
+      - ins: F. Valsorda
+  weak-dh:
+    title: "Weak Diffie-Hellman and the Logjam Attack"
+    target: https://weakdh.org/
+    date: 2015-10
+    author:
+      - ins: D. Adrian
+      - ins: K. Bhargavan
+      - ins: Z. Durumeric
+      - ins: P. Gaudry
+      - ins: M. Green
+      - ins: J. A. Halderman
+      - ins: N. Heninger
+      - ins: D. Springall
+      - ins: E. Thomé
+      - ins: L. Valenta
+      - ins: B. VanderSloot
+      - ins: E. Wustrow
+      - ins: S. Zanella-Béguelin
+      - ins: P. Zimmermann
+  subgroups:
+    title: "Measuring small subgroup attacks against Diffie-Hellman"
+    target: https://eprint.iacr.org/2016/995/20161017:193515
+    date: 2016-10-15
+    author:
+      - ins: L. Valenta
+      - ins: D. Adrian
+      - ins: A. Sanso
+      - ins: S. Cohney
+      - ins: J. Fried
+      - ins: M. Hastings
+      - ins: J. A. Halderman
+      - ins: N. Heninger
 
 author:
  -
@@ -53,7 +93,7 @@ TLS supports a variety of key exchange algorithms, including RSA and Diffie Hell
 over a finite field, as well as elliptic curve Diffie Hellman (ECDH).
 Diffie Hellman key exchange, over any group, may use either long-lived or ephemeral
 secrets. Diffie Hellman key exchange with long-lived secrets over a finite field is
-already deprecated in deprecate-ffdh (TODO cite properly).
+already deprecated in {{deprecate-ffdh}}.
 This document focuses on Diffie Hellman over a finite field with ephemeral secrets
 (FFDHE), as well as RSA key exchange.
 
@@ -61,21 +101,25 @@ Recent years have brought to light several security concerns
 regarding FFDHE key exchange that stem from implementation choices.
 Additionally, RSA key exchange suffers from security problems that are
 independent of implementation choices, as well as problems that stem purely from
-the difficulty of implementing countermeasures correctly.
+the difficulty of implementing security countermeasures correctly.
 
 At a rough glance, the problems affecting FFDHE are as follows (TODO add citations to everything here):
 
-1. FFDHE suffers from interoperability problems, because there is no mechanism for negotiating the group size, and some implementations only support small group sizes.
+1. FFDHE suffers from interoperability problems, because there is no mechanism for negotiating the group size, and some implementations only support small group sizes; see Section 1 of {{!RFC7919}}.
 
 2. In practice, operators use 1024 bit FFDHE groups, since this is the maximum
 size that is widely supported. This leaves only a small security margin vs. the
-current discrete log record, which stands at 795 bits. (TODO try to find an authoritative source)
+current discrete log record, which stands at 795 bits.
+TODO ask David Benjamin if there's a more citable source, or we go with either RFC 7919 or the infamous Logjam thread:
+https://groups.google.com/a/chromium.org/g/security-dev/c/WyGIpevBV1s
 
-3. Expanding on the previous point, a handful of very large computations would allow cheaply decrypting a relatively large fraction of FFDHE traffic.
+3. Expanding on the previous point, a handful of very large computations would allow cheaply decrypting a relatively large fraction of FFDHE traffic
+{{weak-dh}}.
 
 4. When secrets are not fully ephemeral, FFDHE suffers from the {{Raccoon}} side channel attack.
 
-5. FFDHE groups may have small subgroups, which may enable several attacks.
+5. FFDHE groups may have small subgroups, which may enable several attacks
+{{subgroups}}.
 
 And the problems affecting RSA key exchange are as follows (should add citations to everything here):
 
@@ -131,7 +175,7 @@ Note that FFDH cipher suites are already deprecated in deprecate-ffdh.
 
 # IANA Considerations
 
-This document makes no requests to IANA. All cipher suites listed in {{non-ephemeral}}
+This document makes no requests to IANA. All cipher suites listed in {{dhe}}
 are already marked as not recommended in the "TLS Cipher Suites" registry.
 
 # Security Considerations {#sec-considerations}
