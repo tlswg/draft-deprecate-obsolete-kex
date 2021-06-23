@@ -71,6 +71,67 @@ informative:
       - ins: M. Hastings
       - ins: J. A. Halderman
       - ins: N. Heninger
+  BLEI:
+    title: "Chosen Ciphertext Attacks against Protocols Based on RSA
+    Encryption Standard PKCS #1"
+    author:
+      - ins: D. Bleichenbacher
+    seriesinfo: "Advances in Cryptology -- CRYPTO'98, LNCS vol. 1462, pages:
+    1-12"
+    date: 1998
+  ROBOT:
+    title: "Return Of Bleichenbacher's Oracle Threat (ROBOT)"
+    author:
+      - ins: H. Boeck
+      - ins: J. Somorovsky
+      - ins: C. Young
+    seriesinfo: "27th USENIX Security Symposium"
+    date: 2018
+  NEW-BLEI:
+    title: "Revisiting SSL/TLS Implementations: New Bleichenbacher Side Channels and Attacks"
+    target: https://www.usenix.org/system/files/conference/usenixsecurity14/sec14-paper-meyer.pdf
+    date: 2014-08
+    author:
+      - ins: C. Meyer
+      - ins: J. Somorovsky
+      - ins: E. Weiss
+      - ins: J. Schwenk
+      - ins: S. Schinzel
+      - ins: E. Tews
+  DROWN:
+    title: "DROWN: Breaking TLS using SSLv2"
+    target: https://drownattack.com/drown-attack-paper.pdf
+    date: 2016-08
+    author:
+      - ins: N. Aviram
+      - ins: S. Schinzel
+      - ins: J. Somorovsky
+      - ins: N. Heninger
+      - ins: M. Dankel
+      - ins: J. Steube
+      - ins: L. Valenta
+      - ins: D. Adrian
+      - ins: J. A. Halderman
+      - ins: V. Dukhovni
+      - ins: E. Käsper
+      - ins: S. Cohney
+      - ins: S. Engels
+      - ins: C. Paar
+      - ins: Y. Shavitt
+  XPROT:
+    title: "On the Security of TLS 1.3 and QUIC Against Weaknesses in PKCS#1 v1.5 Encryption"
+    author:
+      - ins: T. Jager
+      - ins: J. Schwenk
+      - ins: J. Somorovsky
+    seriesinfo: Proceedings of the 22nd ACM SIGSAC Conference on Computer and Communications Security
+    date: 2015
+  SC-tls-des-idea-ciphers-to-historic:
+    title: "Moving single-DES and IDEA TLS ciphersuites to Historic"
+    target: https://datatracker.ietf.org/doc/status-change-tls-des-idea-ciphers-to-historic/
+    author:
+      -ins: Benjamin Kaduk
+    date: 2021-01-25
 
 author:
  -
@@ -103,7 +164,7 @@ Additionally, RSA key exchange suffers from security problems that are
 independent of implementation choices, as well as problems that stem purely from
 the difficulty of implementing security countermeasures correctly.
 
-At a rough glance, the problems affecting FFDHE are as follows (TODO add citations to everything here):
+At a rough glance, the problems affecting FFDHE are as follows:
 
 1. FFDHE suffers from interoperability problems, because there is no mechanism for negotiating the group size, and some implementations only support small group sizes; see Section 1 of {{!RFC7919}}.
 
@@ -125,13 +186,16 @@ And the problems affecting RSA key exchange are as follows (should add citations
 
 1. RSA key exchange offers no forward secrecy, by construction.
 
-2. RSA key exchange may be vulnerable to Bleichenbacher's attack. Experience
-shows that variants of this attack arise every few years, because implementing the relevant countermeasure correctly is difficult.
+2. RSA key exchange may be vulnerable to Bleichenbacher's attack {{BLEI}}.
+Experience shows that variants of this attack arise every few years, because
+implementing the relevant countermeasure correctly is difficult; see
+{{ROBOT}}, {{NEW-BLEI}}, {{DROWN}}.
 
-3. In addition to the above point, there is no convenient mechanism in TLS for domain separation of keys. Therefore, a single endpoint that is vulnerable to Bleichenbacher's attack would affect all endpoints sharing the same RSA key.
+3. In addition to the above point, there is no convenient mechanism in TLS for domain separation of keys. Therefore, a single endpoint that is vulnerable to Bleichenbacher's attack would affect all endpoints sharing the same RSA key; see
+{{XPROT}}, {{DROWN}}.
 
-I guess the plan is to elaborate on each point in a full paragraph in the
-security considerations section?
+TODO: One option is to elaborate on each point in a full paragraph in the
+security considerations section. Should we do that?
 
 Given these problems, this document updates {{!RFC4346}}, {{!RFC5246}}, {{!RFC4162}},
 {{!RFC6347}}, {{!RFC5932}}, {{!RFC5288}}, {{!RFC6209}}, {{!RFC6367}}, {{!RFC8422}},
@@ -145,20 +209,72 @@ Given these problems, this document updates {{!RFC4346}}, {{!RFC5246}}, {{!RFC41
 
 Clients and servers MUST NOT offer RSA cipher suites in TLS 1.0, 1.1, and 1.2
 connections. This includes all cipher suites listed in the following table.
-
-TODO fix this
+Note that these cipher suites are already marked as not recommended in the "TLS
+Cipher Suites" registry.
 
 | Ciphersuite  | Reference |
 |:-|:-|
-| TLS_DH_DSS_EXPORT_WITH_DES40_CBC_SHA | {{!RFC4346}} |
+| TLS_RSA_WITH_NULL_MD5 | {{!RFC5246}} |
+| TLS_RSA_WITH_NULL_SHA | {{!RFC5246}} |
+| TLS_RSA_EXPORT_WITH_RC4_40_MD5 | {{!RFC4346}}{{!RFC6347}} |
+| TLS_RSA_WITH_RC4_128_MD5 | {{!RFC5246}}{{!RFC6347}} |
+| TLS_RSA_WITH_RC4_128_SHA | {{!RFC5246}}{{!RFC6347}} |
+| TLS_RSA_EXPORT_WITH_RC2_CBC_40_MD5 | {{!RFC4346}} |
+| TLS_RSA_WITH_IDEA_CBC_SHA | {{!RFC5469}}{{SC-tls-des-idea-ciphers-to-historic}} |
+| TLS_RSA_EXPORT_WITH_DES40_CBC_SHA | {{!RFC4346}} |
+| TLS_RSA_WITH_DES_CBC_SHA | {{!RFC5469}}{{SC-tls-des-idea-ciphers-to-historic}} |
+| TLS_RSA_WITH_3DES_EDE_CBC_SHA | {{!RFC5246}} |
+| TLS_RSA_PSK_WITH_NULL_SHA | {{!RFC4785}} |
+| TLS_RSA_WITH_AES_128_CBC_SHA | {{!RFC5246}} |
+| TLS_RSA_WITH_AES_256_CBC_SHA | {{!RFC5246}} |
+| TLS_RSA_WITH_NULL_SHA256 | {{!RFC5246}} |
+| TLS_RSA_WITH_AES_128_CBC_SHA256 | {{!RFC5246}} |
+| TLS_RSA_WITH_AES_256_CBC_SHA256 | {{!RFC5246}} |
+| TLS_RSA_WITH_CAMELLIA_128_CBC_SHA | {{!RFC5932}} |
+| TLS_RSA_WITH_CAMELLIA_256_CBC_SHA | {{!RFC5932}} |
+| TLS_RSA_PSK_WITH_RC4_128_SHA | {{!RFC4279}}{{!RFC6347}} |
+| TLS_RSA_PSK_WITH_3DES_EDE_CBC_SHA | {{!RFC4279}} |
+| TLS_RSA_PSK_WITH_AES_128_CBC_SHA | {{!RFC4279}} |
+| TLS_RSA_PSK_WITH_AES_256_CBC_SHA | {{!RFC4279}} |
+| TLS_RSA_WITH_SEED_CBC_SHA | {{!RFC4162}} |
+| TLS_RSA_WITH_AES_128_GCM_SHA256 | {{!RFC5288}} |
+| TLS_RSA_WITH_AES_256_GCM_SHA384 | {{!RFC5288}} |
+| TLS_RSA_PSK_WITH_AES_128_GCM_SHA256 | {{!RFC5487}} |
+| TLS_RSA_PSK_WITH_AES_256_GCM_SHA384 | {{!RFC5487}} |
+| TLS_RSA_PSK_WITH_AES_128_CBC_SHA256 | {{!RFC5487}} |
+| TLS_RSA_PSK_WITH_AES_256_CBC_SHA384 | {{!RFC5487}} |
+| TLS_RSA_PSK_WITH_NULL_SHA256 | {{!RFC5487}} |
+| TLS_RSA_PSK_WITH_NULL_SHA384 | {{!RFC5487}} |
+| TLS_RSA_WITH_CAMELLIA_128_CBC_SHA256 | {{!RFC5932}} |
+| TLS_RSA_WITH_CAMELLIA_256_CBC_SHA256 | {{!RFC5932}} |
+| TLS_RSA_WITH_ARIA_128_CBC_SHA256 | {{!RFC6209}} |
+| TLS_RSA_WITH_ARIA_256_CBC_SHA384 | {{!RFC6209}} |
+| TLS_RSA_WITH_ARIA_128_GCM_SHA256 | {{!RFC6209}} |
+| TLS_RSA_WITH_ARIA_256_GCM_SHA384 | {{!RFC6209}} |
+| TLS_RSA_PSK_WITH_ARIA_128_CBC_SHA256 | {{!RFC6209}} |
+| TLS_RSA_PSK_WITH_ARIA_256_CBC_SHA384 | {{!RFC6209}} |
+| TLS_RSA_PSK_WITH_ARIA_128_GCM_SHA256 | {{!RFC6209}} |
+| TLS_RSA_PSK_WITH_ARIA_256_GCM_SHA384 | {{!RFC6209}} |
+| TLS_RSA_WITH_CAMELLIA_128_GCM_SHA256 | {{!RFC6367}} |
+| TLS_RSA_WITH_CAMELLIA_256_GCM_SHA384 | {{!RFC6367}} |
+| TLS_RSA_PSK_WITH_CAMELLIA_128_GCM_SHA256 | {{!RFC6367}} |
+| TLS_RSA_PSK_WITH_CAMELLIA_256_GCM_SHA384 | {{!RFC6367}} |
+| TLS_RSA_PSK_WITH_CAMELLIA_128_CBC_SHA256 | {{!RFC6367}} |
+| TLS_RSA_PSK_WITH_CAMELLIA_256_CBC_SHA384 | {{!RFC6367}} |
+| TLS_RSA_WITH_AES_128_CCM | {{!RFC6655}} |
+| TLS_RSA_WITH_AES_256_CCM | {{!RFC6655}} |
+| TLS_RSA_WITH_AES_128_CCM_8 | {{!RFC6655}} |
+| TLS_RSA_WITH_AES_256_CCM_8 | {{!RFC6655}} |
+| TLS_RSA_PSK_WITH_CHACHA20_POLY1305_SHA256 | {{!RFC7905}} |
 
-# Ephemeral Diffie Hellman {#dhe}
+# Ephemeral Finite Field Diffie Hellman {#dhe}
 
 Clients and servers MAY offer fully ephemeral FFDHE cipher suites in TLS 1.0,
 1.1, and 1.2 connections, under the following conditions:
 
-1. The secret DH key is fully ephemeral, that is a fresh DH exponent is generated for each TLS connection.
-Note that this requirement is also specified in deprecate-ffdh.
+1. The secret DH key is fully ephemeral, that is, a fresh DH exponent is
+generated for each TLS connection.
+Note that this requirement is also specified in {{deprecate-ffdh}}.
 
 2. The group is one of the following well-known groups described in {{!RFC7919}}:
 ffdhe2048, ffdhe3072, ffdhe4096, ffdhe6144, ffdhe8192.
