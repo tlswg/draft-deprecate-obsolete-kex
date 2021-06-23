@@ -132,6 +132,17 @@ informative:
     author:
       -ins: Benjamin Kaduk
     date: 2021-01-25
+  DLOG795:
+    title: "Comparing the difficulty of factorization and discrete logarithm: a 240-digit experiment"
+    target: https://eprint.iacr.org/2020/697
+    author:
+      - ins: F. Boudot
+      - ins: P. Gaudry
+      - ins: A. Guillevic
+      - ins: N. Heninger
+      - ins: E. Thomé
+      - ins: P. Zimmermann
+    date: 2020-08-17
 
 author:
  -
@@ -170,7 +181,7 @@ At a rough glance, the problems affecting FFDHE are as follows:
 
 2. In practice, operators use 1024 bit FFDHE groups, since this is the maximum
 size that is widely supported. This leaves only a small security margin vs. the
-current discrete log record, which stands at 795 bits.
+current discrete log record, which stands at 795 bits {{DLOG795}}.
 TODO ask David Benjamin if there's a more citable source, or we go with either RFC 7919 or the infamous Logjam thread:
 https://groups.google.com/a/chromium.org/g/security-dev/c/WyGIpevBV1s
 
