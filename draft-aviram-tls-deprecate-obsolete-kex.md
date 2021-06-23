@@ -281,18 +281,84 @@ ffdhe2048, ffdhe3072, ffdhe4096, ffdhe6144, ffdhe8192.
 
 This applies to all cipher suites listed in the following table.
 
-TODO FIX
-
 | Ciphersuite  | Reference |
 |:-|:-|
-| TLS_ECDH_ECDSA_WITH_NULL_SHA | {{!RFC8422}} |
+| TLS_DHE_DSS_EXPORT_WITH_DES40_CBC_SHA | {{!RFC4346}} |
+| TLS_DHE_DSS_WITH_DES_CBC_SHA | {{!RFC5469}}{{SC-tls-des-idea-ciphers-to-historic}} |
+| TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA | {{!RFC5246}} |
+| TLS_DHE_RSA_EXPORT_WITH_DES40_CBC_SHA | {{!RFC4346}} |
+| TLS_DHE_RSA_WITH_DES_CBC_SHA | {{!RFC5469}}{{SC-tls-des-idea-ciphers-to-historic}} |
+| TLS_DHE_RSA_WITH_3DES_EDE_CBC_SHA | {{!RFC5246}} |
+| TLS_DHE_PSK_WITH_NULL_SHA | {{!RFC4785}} |
+| TLS_DHE_DSS_WITH_AES_128_CBC_SHA | {{!RFC5246}} |
+| TLS_DHE_RSA_WITH_AES_128_CBC_SHA | {{!RFC5246}} |
+| TLS_DHE_DSS_WITH_AES_256_CBC_SHA | {{!RFC5246}} |
+| TLS_DHE_RSA_WITH_AES_256_CBC_SHA | {{!RFC5246}} |
+| TLS_DHE_DSS_WITH_AES_128_CBC_SHA256 | {{!RFC5246}} |
+| TLS_DHE_DSS_WITH_CAMELLIA_128_CBC_SHA | {{!RFC5932}} |
+| TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA | {{!RFC5932}} |
+| TLS_DHE_RSA_WITH_AES_128_CBC_SHA256 | {{!RFC5246}} |
+| TLS_DHE_DSS_WITH_AES_256_CBC_SHA256 | {{!RFC5246}} |
+| TLS_DHE_RSA_WITH_AES_256_CBC_SHA256 | {{!RFC5246}} |
+| TLS_DHE_DSS_WITH_CAMELLIA_256_CBC_SHA | {{!RFC5932}} |
+| TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA | {{!RFC5932}} |
+| TLS_DHE_PSK_WITH_RC4_128_SHA | {{!RFC4279}}{{!RFC6347}} |
+| TLS_DHE_PSK_WITH_3DES_EDE_CBC_SHA | {{!RFC4279}} |
+| TLS_DHE_PSK_WITH_AES_128_CBC_SHA | {{!RFC4279}} |
+| TLS_DHE_PSK_WITH_AES_256_CBC_SHA | {{!RFC4279}} |
+| TLS_DHE_DSS_WITH_SEED_CBC_SHA | {{!RFC4162}} |
+| TLS_DHE_RSA_WITH_SEED_CBC_SHA | {{!RFC4162}} |
+| TLS_DHE_RSA_WITH_AES_128_GCM_SHA256 | {{!RFC5288}} |
+| TLS_DHE_RSA_WITH_AES_256_GCM_SHA384 | {{!RFC5288}} |
+| TLS_DHE_DSS_WITH_AES_128_GCM_SHA256 | {{!RFC5288}} |
+| TLS_DHE_DSS_WITH_AES_256_GCM_SHA384 | {{!RFC5288}} |
+| TLS_DHE_PSK_WITH_AES_128_GCM_SHA256 | {{!RFC5487}} |
+| TLS_DHE_PSK_WITH_AES_256_GCM_SHA384 | {{!RFC5487}} |
+| TLS_DHE_PSK_WITH_AES_128_CBC_SHA256 | {{!RFC5487}} |
+| TLS_DHE_PSK_WITH_AES_256_CBC_SHA384 | {{!RFC5487}} |
+| TLS_DHE_PSK_WITH_NULL_SHA256 | {{!RFC5487}} |
+| TLS_DHE_PSK_WITH_NULL_SHA384 | {{!RFC5487}} |
+| TLS_DHE_DSS_WITH_CAMELLIA_128_CBC_SHA256 | {{!RFC5932}} |
+| TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA256 | {{!RFC5932}} |
+| TLS_DHE_DSS_WITH_CAMELLIA_256_CBC_SHA256 | {{!RFC5932}} |
+| TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA256 | {{!RFC5932}} |
+| TLS_DHE_DSS_WITH_ARIA_128_CBC_SHA256 | {{!RFC6209}} |
+| TLS_DHE_DSS_WITH_ARIA_256_CBC_SHA384 | {{!RFC6209}} |
+| TLS_DHE_RSA_WITH_ARIA_128_CBC_SHA256 | {{!RFC6209}} |
+| TLS_DHE_RSA_WITH_ARIA_256_CBC_SHA384 | {{!RFC6209}} |
+| TLS_DHE_RSA_WITH_ARIA_128_GCM_SHA256 | {{!RFC6209}} |
+| TLS_DHE_RSA_WITH_ARIA_256_GCM_SHA384 | {{!RFC6209}} |
+| TLS_DHE_DSS_WITH_ARIA_128_GCM_SHA256 | {{!RFC6209}} |
+| TLS_DHE_DSS_WITH_ARIA_256_GCM_SHA384 | {{!RFC6209}} |
+| TLS_DHE_PSK_WITH_ARIA_128_CBC_SHA256 | {{!RFC6209}} |
+| TLS_DHE_PSK_WITH_ARIA_256_CBC_SHA384 | {{!RFC6209}} |
+| TLS_DHE_PSK_WITH_ARIA_128_GCM_SHA256 | {{!RFC6209}} |
+| TLS_DHE_PSK_WITH_ARIA_256_GCM_SHA384 | {{!RFC6209}} |
+| TLS_DHE_RSA_WITH_CAMELLIA_128_GCM_SHA256 | {{!RFC6367}} |
+| TLS_DHE_RSA_WITH_CAMELLIA_256_GCM_SHA384 | {{!RFC6367}} |
+| TLS_DHE_DSS_WITH_CAMELLIA_128_GCM_SHA256 | {{!RFC6367}} |
+| TLS_DHE_DSS_WITH_CAMELLIA_256_GCM_SHA384 | {{!RFC6367}} |
+| TLS_DHE_PSK_WITH_CAMELLIA_128_GCM_SHA256 | {{!RFC6367}} |
+| TLS_DHE_PSK_WITH_CAMELLIA_256_GCM_SHA384 | {{!RFC6367}} |
+| TLS_DHE_PSK_WITH_CAMELLIA_128_CBC_SHA256 | {{!RFC6367}} |
+| TLS_DHE_PSK_WITH_CAMELLIA_256_CBC_SHA384 | {{!RFC6367}} |
+| TLS_DHE_RSA_WITH_AES_128_CCM | {{!RFC6655}} |
+| TLS_DHE_RSA_WITH_AES_256_CCM | {{!RFC6655}} |
+| TLS_DHE_RSA_WITH_AES_128_CCM_8 | {{!RFC6655}} |
+| TLS_DHE_RSA_WITH_AES_256_CCM_8 | {{!RFC6655}} |
+| TLS_DHE_PSK_WITH_AES_128_CCM | {{!RFC6655}} |
+| TLS_DHE_PSK_WITH_AES_256_CCM | {{!RFC6655}} |
+| TLS_DHE_RSA_WITH_CHACHA20_POLY1305_SHA256 | {{!RFC7905}} |
+| TLS_DHE_PSK_WITH_CHACHA20_POLY1305_SHA256 | {{!RFC7905}} |
 
 Note that FFDH cipher suites are already deprecated in deprecate-ffdh.
 
 # IANA Considerations
 
-This document makes no requests to IANA. All cipher suites listed in {{dhe}}
-are already marked as not recommended in the "TLS Cipher Suites" registry.
+This document makes no requests to IANA. All cipher suites listed in {{rsa}} are
+already marked as not recommended in the "TLS Cipher Suites" registry, although
+not so for some cipher suites listed in {{dhe}} (TODO Does this mean we should
+make a request to IANA?).
 
 # Security Considerations {#sec-considerations}
 
@@ -300,7 +366,7 @@ TODO
 
 # Acknowledgments
 
-TODO
 This document was inspired by discussion on the TLS WG mailing list and
-a suggestion by Filippo Valsorda following the release of the {{Raccoon}} attack. Thanks
-to Christopher A. Wood for writing up the initial draft of this document.
+a suggestion by Filippo Valsorda following the release of the {{Raccoon}} attack.
+Thanks to Christopher A. Wood and Carrick D. Bartle for useful feedback,
+discussions, and ideas.
