@@ -143,7 +143,12 @@ informative:
       - ins: E. Thomé
       - ins: P. Zimmermann
     date: 2020-08-17
-
+  server_side_tls:
+    title: "Server Side TLS"
+    target: https://wiki.mozilla.org/Security/Server_Side_TLS
+    author:
+      - ins: A. King
+    date: 2020-07
 author:
  -
        ins: N. Aviram
@@ -177,13 +182,11 @@ the difficulty of implementing security countermeasures correctly.
 
 At a rough glance, the problems affecting FFDHE are as follows:
 
-1. FFDHE suffers from interoperability problems, because there is no mechanism for negotiating the group size, and some implementations only support small group sizes; see Section 1 of {{!RFC7919}}.
+1. FFDHE suffers from interoperability problems, because there is no mechanism for negotiating the group size, and some implementations only support small group sizes; see {{!RFC7919}}, Section 1.
 
-2. In practice, operators use 1024 bit FFDHE groups, since this is the maximum
-size that is widely supported. This leaves only a small security margin vs. the
-current discrete log record, which stands at 795 bits {{DLOG795}}.
-TODO ask David Benjamin if there's a more citable source, or we go with either RFC 7919 or the infamous Logjam thread:
-https://groups.google.com/a/chromium.org/g/security-dev/c/WyGIpevBV1s
+2. In practice, some operators use 1024 bit FFDHE groups, since this is the
+maximum size that ensures wide support; see {{!RFC7919}}, Section 1.
+This size leaves only a small security margin vs. the current discrete log record, which stands at 795 bits {{DLOG795}}.
 
 3. Expanding on the previous point, a handful of very large computations would allow cheaply decrypting a relatively large fraction of FFDHE traffic
 {{weak-dh}}.
@@ -193,7 +196,7 @@ https://groups.google.com/a/chromium.org/g/security-dev/c/WyGIpevBV1s
 5. FFDHE groups may have small subgroups, which may enable several attacks
 {{subgroups}}.
 
-And the problems affecting RSA key exchange are as follows (should add citations to everything here):
+And the problems affecting RSA key exchange are as follows:
 
 1. RSA key exchange offers no forward secrecy, by construction.
 
@@ -287,7 +290,12 @@ Note that this requirement is also specified in {{deprecate-ffdh}}.
 2. The group is one of the following well-known groups described in {{!RFC7919}}:
 ffdhe2048, ffdhe3072, ffdhe4096, ffdhe6144, ffdhe8192.
 
-This applies to all cipher suites listed in the following table.
+We note that previously, supporting the broadest range of clients would have required supporting either RSA key exchange, or 1024-bit FFDHE.
+This is no longer the case, and it is possible to support most clients released
+since circa 2015 using 2048-bit FFDHE, or more modern key exchange methods, and
+without RSA key exchange {{server_side_tls}}.
+
+The above requirements apply to all cipher suites listed in the following table.
 
 | Ciphersuite  | Reference |
 |:-|:-|
