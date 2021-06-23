@@ -194,9 +194,6 @@ implementing the relevant countermeasure correctly is difficult; see
 3. In addition to the above point, there is no convenient mechanism in TLS for domain separation of keys. Therefore, a single endpoint that is vulnerable to Bleichenbacher's attack would affect all endpoints sharing the same RSA key; see
 {{XPROT}}, {{DROWN}}.
 
-TODO: One option is to elaborate on each point in a full paragraph in the
-security considerations section. Should we do that?
-
 Given these problems, this document updates {{!RFC4346}}, {{!RFC5246}}, {{!RFC4162}},
 {{!RFC6347}}, {{!RFC5932}}, {{!RFC5288}}, {{!RFC6209}}, {{!RFC6367}}, {{!RFC8422}},
 {{!RFC5289}}, and {{!RFC5469}} to deprecate RSA key exchange in TLS, and limit use of FFDH such that it provides acceptable security properties.
@@ -362,7 +359,8 @@ make a request to IANA?).
 
 # Security Considerations {#sec-considerations}
 
-TODO
+TODO: The whole document is basically about security. Do we need to elaborate
+more here?
 
 # Acknowledgments
 
