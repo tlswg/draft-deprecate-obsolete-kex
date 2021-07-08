@@ -210,7 +210,7 @@ implementing the relevant countermeasure correctly is difficult; see
 
 Given these problems, this document updates {{!RFC4346}}, {{!RFC5246}}, {{!RFC4162}},
 {{!RFC6347}}, {{!RFC5932}}, {{!RFC5288}}, {{!RFC6209}}, {{!RFC6367}}, {{!RFC8422}},
-{{!RFC5289}}, and {{!RFC5469}} to deprecate RSA key exchange in TLS, and limit use of FFDH such that it provides acceptable security properties.
+{{!RFC5289}}, and {{!RFC5469}} to deprecate RSA key exchange in TLS, and limit use of FFDHE such that it provides acceptable security properties.
 
 ## Requirements
 
