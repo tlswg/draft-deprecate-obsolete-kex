@@ -23,14 +23,6 @@ informative:
       - ins: J. Somorovsky
       - ins: J. Mittmann
       - ins: J. Schwenk
-  ICA:
-    title: "Practical invalid curve attacks on TLS-ECDH"
-    target: https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.704.7932&rep=rep1&type=pdf
-    date: 2015-09-21
-    author:
-      - ins: T. Jager
-      - ins: J. Schwenk
-      - ins: J. Somorovsky
   deprecate-ffdh:
     title: "Deprecating FFDH Ciphersuites in TLS"
     target: https://datatracker.ietf.org/doc/draft-bartle-tls-deprecate-ffdhe/
