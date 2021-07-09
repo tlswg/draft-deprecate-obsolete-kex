@@ -359,7 +359,7 @@ The above requirements apply to all cipher suites listed in the following table.
 | TLS_DHE_RSA_WITH_CHACHA20_POLY1305_SHA256 | {{!RFC7905}} |
 | TLS_DHE_PSK_WITH_CHACHA20_POLY1305_SHA256 | {{!RFC7905}} |
 
-Note that FFDH cipher suites are already deprecated in deprecate-ffdh.
+Note that FFDH cipher suites are already deprecated in {{deprecate-ffdh}}.
 
 # IANA Considerations
 
