@@ -363,15 +363,13 @@ Note that FFDH cipher suites are already deprecated in deprecate-ffdh.
 
 # IANA Considerations
 
-This document makes no requests to IANA. All cipher suites listed in {{rsa}} are
-already marked as not recommended in the "TLS Cipher Suites" registry, although
-not so for some cipher suites listed in {{dhe}} (TODO Does this mean we should
-make a request to IANA?).
+This document makes no requests to IANA. Note that all cipher suites listed in
+{{rsa}} are already marked as not recommended in the "TLS Cipher Suites"
+registry.
 
 # Security Considerations {#sec-considerations}
 
-TODO: The whole document is basically about security. Do we need to elaborate
-more here?
+This document is entirely about security.
 
 # Acknowledgments
 
