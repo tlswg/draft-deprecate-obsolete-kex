@@ -1,7 +1,7 @@
 ---
 title: Deprecating Obsolete Key Exchange Methods in TLS
 abbrev: Deprecating RSA and FFDH(E)
-docname: draft-aviram-tls-deprecate-obsolete-kex-latest
+docname: draft-bartle-tls-deprecate-obsolete-kex-latest
 date:
 category: std
 
@@ -142,6 +142,11 @@ informative:
       - ins: A. King
     date: 2020-07
 author:
+-
+      ins: C. Bartle
+      name: Carrick Bartle
+      organization: Apple, Inc.
+      email: cbartle@apple.com
  -
        ins: N. Aviram
        name: Nimrod Aviram
