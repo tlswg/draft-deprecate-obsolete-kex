@@ -1,7 +1,7 @@
 ---
 title: Deprecating Obsolete Key Exchange Methods in TLS
 abbrev: Deprecating RSA and FFDH(E)
-docname: draft-bartle-tls-deprecate-obsolete-kex-latest
+docname: draft-aviram-tls-deprecate-obsolete-kex-latest
 date:
 category: std
 
@@ -23,6 +23,14 @@ informative:
       - ins: J. Somorovsky
       - ins: J. Mittmann
       - ins: J. Schwenk
+  ICA:
+    title: "Practical invalid curve attacks on TLS-ECDH"
+    target: https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.704.7932&rep=rep1&type=pdf
+    date: 2015-09-21
+    author:
+      - ins: T. Jager
+      - ins: J. Schwenk
+      - ins: J. Somorovsky
   deprecate-ffdh:
     title: "Deprecating FFDH Ciphersuites in TLS"
     target: https://datatracker.ietf.org/doc/draft-bartle-tls-deprecate-ffdhe/
@@ -147,11 +155,11 @@ author:
       name: Carrick Bartle
       organization: Apple, Inc.
       email: cbartle@apple.com
- -
-       ins: N. Aviram
-       name: Nimrod Aviram
-       organization:
-       email: nimrod.aviram@gmail.com
+-
+      ins: N. Aviram
+      name: Nimrod Aviram
+      organization:
+      email: nimrod.aviram@gmail.com
 
 --- abstract
 
@@ -209,6 +217,7 @@ implementing the relevant countermeasure correctly is difficult; see
 {{XPROT}}, {{DROWN}}.
 
 Given these problems, this document updates {{!RFC4346}}, {{!RFC5246}}, {{!RFC4162}}, {{!RFC6347}}, {{!RFC5932}}, {{!RFC5288}}, {{!RFC6209}}, {{!RFC6367}}, {{!RFC8422}}, {{!RFC5289}}, and {{!RFC5469}} to deprecate cipher suites with key reuse, prohibiting and discouraging their use.
+
 ## Requirements
 
 {::boilerplate bcp14}
