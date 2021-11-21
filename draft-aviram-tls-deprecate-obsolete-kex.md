@@ -228,11 +228,11 @@ Given these problems, this document updates {{!RFC4346}}, {{!RFC5246}}, {{!RFC41
 # Non-Ephemeral Diffie Hellman {#non-ephemeral}
 
 Clients MUST NOT offer non-ephemeral DH cipher suites in TLS 1.2 connections. (Note that
-TLS 1.0 and 1.1 are deprecated by {{!RFC8996}}.) This includes all cipher suites listed in the table in Appendix {{appendix-dh}}.
+TLS 1.0 and 1.1 are deprecated by {{!RFC8996}}.) This includes all cipher suites listed in the table in {{appendix-dh}}.
 
 Clients SHOULD NOT offer non-ephemeral ECDH cipher suites in TLS 1.2
 connections. (Note that TLS 1.0 and 1.1 are deprecated by {{!RFC8996}}.) This
-includes all cipher suites listed in the table in Appendix {{appendix-ecdh}}.
+includes all cipher suites listed in the table in {{appendix-ecdh}}.
 
 # Ephemeral Finite Field Diffie Hellman {#dhe}
 
@@ -248,69 +248,14 @@ This is no longer the case, and it is possible to support most clients released
 since circa 2015 using 2048-bit FFDHE, or more modern key exchange methods, and
 without RSA key exchange {{server_side_tls}}.
 
-The above requirements apply to all cipher suites listed in the table in Appendix {{appendix-dhe}}.
+The above requirements apply to all cipher suites listed in the table in {{appendix-dhe}}.
 
 # RSA {#rsa}
 
 Clients and servers MUST NOT offer RSA cipher suites in TLS 1.2
-connections. (Note that TLS 1.0 and 1.1 are deprecated by {{!RFC8996}}.). This includes all cipher suites listed in the following table.
+connections. (Note that TLS 1.0 and 1.1 are deprecated by {{!RFC8996}}.). This includes all cipher suites listed in the table in {{appendix-rsa}}.
 Note that these cipher suites are already marked as not recommended in the "TLS
 Cipher Suites" registry.
-
-| Ciphersuite  | Reference |
-|:-|:-|
-| TLS_RSA_WITH_NULL_MD5 | {{!RFC5246}} |
-| TLS_RSA_WITH_NULL_SHA | {{!RFC5246}} |
-| TLS_RSA_EXPORT_WITH_RC4_40_MD5 | {{!RFC4346}}{{!RFC6347}} |
-| TLS_RSA_WITH_RC4_128_MD5 | {{!RFC5246}}{{!RFC6347}} |
-| TLS_RSA_WITH_RC4_128_SHA | {{!RFC5246}}{{!RFC6347}} |
-| TLS_RSA_EXPORT_WITH_RC2_CBC_40_MD5 | {{!RFC4346}} |
-| TLS_RSA_WITH_IDEA_CBC_SHA | {{!RFC5469}}{{SC-tls-des-idea-ciphers-to-historic}} |
-| TLS_RSA_EXPORT_WITH_DES40_CBC_SHA | {{!RFC4346}} |
-| TLS_RSA_WITH_DES_CBC_SHA | {{!RFC5469}}{{SC-tls-des-idea-ciphers-to-historic}} |
-| TLS_RSA_WITH_3DES_EDE_CBC_SHA | {{!RFC5246}} |
-| TLS_RSA_PSK_WITH_NULL_SHA | {{!RFC4785}} |
-| TLS_RSA_WITH_AES_128_CBC_SHA | {{!RFC5246}} |
-| TLS_RSA_WITH_AES_256_CBC_SHA | {{!RFC5246}} |
-| TLS_RSA_WITH_NULL_SHA256 | {{!RFC5246}} |
-| TLS_RSA_WITH_AES_128_CBC_SHA256 | {{!RFC5246}} |
-| TLS_RSA_WITH_AES_256_CBC_SHA256 | {{!RFC5246}} |
-| TLS_RSA_WITH_CAMELLIA_128_CBC_SHA | {{!RFC5932}} |
-| TLS_RSA_WITH_CAMELLIA_256_CBC_SHA | {{!RFC5932}} |
-| TLS_RSA_PSK_WITH_RC4_128_SHA | {{!RFC4279}}{{!RFC6347}} |
-| TLS_RSA_PSK_WITH_3DES_EDE_CBC_SHA | {{!RFC4279}} |
-| TLS_RSA_PSK_WITH_AES_128_CBC_SHA | {{!RFC4279}} |
-| TLS_RSA_PSK_WITH_AES_256_CBC_SHA | {{!RFC4279}} |
-| TLS_RSA_WITH_SEED_CBC_SHA | {{!RFC4162}} |
-| TLS_RSA_WITH_AES_128_GCM_SHA256 | {{!RFC5288}} |
-| TLS_RSA_WITH_AES_256_GCM_SHA384 | {{!RFC5288}} |
-| TLS_RSA_PSK_WITH_AES_128_GCM_SHA256 | {{!RFC5487}} |
-| TLS_RSA_PSK_WITH_AES_256_GCM_SHA384 | {{!RFC5487}} |
-| TLS_RSA_PSK_WITH_AES_128_CBC_SHA256 | {{!RFC5487}} |
-| TLS_RSA_PSK_WITH_AES_256_CBC_SHA384 | {{!RFC5487}} |
-| TLS_RSA_PSK_WITH_NULL_SHA256 | {{!RFC5487}} |
-| TLS_RSA_PSK_WITH_NULL_SHA384 | {{!RFC5487}} |
-| TLS_RSA_WITH_CAMELLIA_128_CBC_SHA256 | {{!RFC5932}} |
-| TLS_RSA_WITH_CAMELLIA_256_CBC_SHA256 | {{!RFC5932}} |
-| TLS_RSA_WITH_ARIA_128_CBC_SHA256 | {{!RFC6209}} |
-| TLS_RSA_WITH_ARIA_256_CBC_SHA384 | {{!RFC6209}} |
-| TLS_RSA_WITH_ARIA_128_GCM_SHA256 | {{!RFC6209}} |
-| TLS_RSA_WITH_ARIA_256_GCM_SHA384 | {{!RFC6209}} |
-| TLS_RSA_PSK_WITH_ARIA_128_CBC_SHA256 | {{!RFC6209}} |
-| TLS_RSA_PSK_WITH_ARIA_256_CBC_SHA384 | {{!RFC6209}} |
-| TLS_RSA_PSK_WITH_ARIA_128_GCM_SHA256 | {{!RFC6209}} |
-| TLS_RSA_PSK_WITH_ARIA_256_GCM_SHA384 | {{!RFC6209}} |
-| TLS_RSA_WITH_CAMELLIA_128_GCM_SHA256 | {{!RFC6367}} |
-| TLS_RSA_WITH_CAMELLIA_256_GCM_SHA384 | {{!RFC6367}} |
-| TLS_RSA_PSK_WITH_CAMELLIA_128_GCM_SHA256 | {{!RFC6367}} |
-| TLS_RSA_PSK_WITH_CAMELLIA_256_GCM_SHA384 | {{!RFC6367}} |
-| TLS_RSA_PSK_WITH_CAMELLIA_128_CBC_SHA256 | {{!RFC6367}} |
-| TLS_RSA_PSK_WITH_CAMELLIA_256_CBC_SHA384 | {{!RFC6367}} |
-| TLS_RSA_WITH_AES_128_CCM | {{!RFC6655}} |
-| TLS_RSA_WITH_AES_256_CCM | {{!RFC6655}} |
-| TLS_RSA_WITH_AES_128_CCM_8 | {{!RFC6655}} |
-| TLS_RSA_WITH_AES_256_CCM_8 | {{!RFC6655}} |
-| TLS_RSA_PSK_WITH_CHACHA20_POLY1305_SHA256 | {{!RFC7905}} |
 
 # IANA Considerations
 
@@ -520,3 +465,60 @@ Thanks to Christopher A. Wood for writing up the initial draft of this document.
 | TLS_DHE_PSK_WITH_AES_256_CCM | {{!RFC6655}} |
 | TLS_DHE_RSA_WITH_CHACHA20_POLY1305_SHA256 | {{!RFC7905}} |
 | TLS_DHE_PSK_WITH_CHACHA20_POLY1305_SHA256 | {{!RFC7905}} |
+
+# RSA Cipher Suites Deprecated by This Document {#appendix-rsa}
+
+| Ciphersuite  | Reference |
+|:-|:-|
+| TLS_RSA_WITH_NULL_MD5 | {{!RFC5246}} |
+| TLS_RSA_WITH_NULL_SHA | {{!RFC5246}} |
+| TLS_RSA_EXPORT_WITH_RC4_40_MD5 | {{!RFC4346}}{{!RFC6347}} |
+| TLS_RSA_WITH_RC4_128_MD5 | {{!RFC5246}}{{!RFC6347}} |
+| TLS_RSA_WITH_RC4_128_SHA | {{!RFC5246}}{{!RFC6347}} |
+| TLS_RSA_EXPORT_WITH_RC2_CBC_40_MD5 | {{!RFC4346}} |
+| TLS_RSA_WITH_IDEA_CBC_SHA | {{!RFC5469}}{{SC-tls-des-idea-ciphers-to-historic}} |
+| TLS_RSA_EXPORT_WITH_DES40_CBC_SHA | {{!RFC4346}} |
+| TLS_RSA_WITH_DES_CBC_SHA | {{!RFC5469}}{{SC-tls-des-idea-ciphers-to-historic}} |
+| TLS_RSA_WITH_3DES_EDE_CBC_SHA | {{!RFC5246}} |
+| TLS_RSA_PSK_WITH_NULL_SHA | {{!RFC4785}} |
+| TLS_RSA_WITH_AES_128_CBC_SHA | {{!RFC5246}} |
+| TLS_RSA_WITH_AES_256_CBC_SHA | {{!RFC5246}} |
+| TLS_RSA_WITH_NULL_SHA256 | {{!RFC5246}} |
+| TLS_RSA_WITH_AES_128_CBC_SHA256 | {{!RFC5246}} |
+| TLS_RSA_WITH_AES_256_CBC_SHA256 | {{!RFC5246}} |
+| TLS_RSA_WITH_CAMELLIA_128_CBC_SHA | {{!RFC5932}} |
+| TLS_RSA_WITH_CAMELLIA_256_CBC_SHA | {{!RFC5932}} |
+| TLS_RSA_PSK_WITH_RC4_128_SHA | {{!RFC4279}}{{!RFC6347}} |
+| TLS_RSA_PSK_WITH_3DES_EDE_CBC_SHA | {{!RFC4279}} |
+| TLS_RSA_PSK_WITH_AES_128_CBC_SHA | {{!RFC4279}} |
+| TLS_RSA_PSK_WITH_AES_256_CBC_SHA | {{!RFC4279}} |
+| TLS_RSA_WITH_SEED_CBC_SHA | {{!RFC4162}} |
+| TLS_RSA_WITH_AES_128_GCM_SHA256 | {{!RFC5288}} |
+| TLS_RSA_WITH_AES_256_GCM_SHA384 | {{!RFC5288}} |
+| TLS_RSA_PSK_WITH_AES_128_GCM_SHA256 | {{!RFC5487}} |
+| TLS_RSA_PSK_WITH_AES_256_GCM_SHA384 | {{!RFC5487}} |
+| TLS_RSA_PSK_WITH_AES_128_CBC_SHA256 | {{!RFC5487}} |
+| TLS_RSA_PSK_WITH_AES_256_CBC_SHA384 | {{!RFC5487}} |
+| TLS_RSA_PSK_WITH_NULL_SHA256 | {{!RFC5487}} |
+| TLS_RSA_PSK_WITH_NULL_SHA384 | {{!RFC5487}} |
+| TLS_RSA_WITH_CAMELLIA_128_CBC_SHA256 | {{!RFC5932}} |
+| TLS_RSA_WITH_CAMELLIA_256_CBC_SHA256 | {{!RFC5932}} |
+| TLS_RSA_WITH_ARIA_128_CBC_SHA256 | {{!RFC6209}} |
+| TLS_RSA_WITH_ARIA_256_CBC_SHA384 | {{!RFC6209}} |
+| TLS_RSA_WITH_ARIA_128_GCM_SHA256 | {{!RFC6209}} |
+| TLS_RSA_WITH_ARIA_256_GCM_SHA384 | {{!RFC6209}} |
+| TLS_RSA_PSK_WITH_ARIA_128_CBC_SHA256 | {{!RFC6209}} |
+| TLS_RSA_PSK_WITH_ARIA_256_CBC_SHA384 | {{!RFC6209}} |
+| TLS_RSA_PSK_WITH_ARIA_128_GCM_SHA256 | {{!RFC6209}} |
+| TLS_RSA_PSK_WITH_ARIA_256_GCM_SHA384 | {{!RFC6209}} |
+| TLS_RSA_WITH_CAMELLIA_128_GCM_SHA256 | {{!RFC6367}} |
+| TLS_RSA_WITH_CAMELLIA_256_GCM_SHA384 | {{!RFC6367}} |
+| TLS_RSA_PSK_WITH_CAMELLIA_128_GCM_SHA256 | {{!RFC6367}} |
+| TLS_RSA_PSK_WITH_CAMELLIA_256_GCM_SHA384 | {{!RFC6367}} |
+| TLS_RSA_PSK_WITH_CAMELLIA_128_CBC_SHA256 | {{!RFC6367}} |
+| TLS_RSA_PSK_WITH_CAMELLIA_256_CBC_SHA384 | {{!RFC6367}} |
+| TLS_RSA_WITH_AES_128_CCM | {{!RFC6655}} |
+| TLS_RSA_WITH_AES_256_CCM | {{!RFC6655}} |
+| TLS_RSA_WITH_AES_128_CCM_8 | {{!RFC6655}} |
+| TLS_RSA_WITH_AES_256_CCM_8 | {{!RFC6655}} |
+| TLS_RSA_PSK_WITH_CHACHA20_POLY1305_SHA256 | {{!RFC7905}} |
