@@ -164,8 +164,11 @@ author:
 --- abstract
 
 This document makes several prescriptions regarding the following key exchange methods in TLS, most of which have been superceded by better options:
+
 1. The document deprecates the use of RSA key exchange in TLS.
+
 2. Further, it limits the use of Diffie Hellman key exchange over a finite field,  such as to avoid known vulnerabilities or improper security properties.
+
 3. And lastly, it discourages the use of static elliptic curve Diffie Hellman cipher suites.
 
 --- middle
@@ -504,6 +507,7 @@ exploited to reveal the encrypted premaster secret.
 For non-ephemeral elliptic curve DH cipher suites, invalid curve attacks similarly exploit secret reuse in order to break security. These attacks have been shown to be practical against real-world TLS
 implementations {{ICA}}. Therefore, this document discourages the reuse of elliptic
 curve DH public keys.
+
 # Acknowledgments
 
 This document was inspired by discussion on the TLS WG mailing list and
