@@ -155,10 +155,10 @@ author:
 
 --- abstract
 
-This document deprecates the use of RSA key exchange in TLS, limits the use
-of Diffie Hellman key exchange over a finite field, and  discourages the use of
-elliptic curve Diffie Hellman cipher suites, such as to avoid known
-vulnerabilities or improper security properties.
+This document makes several prescriptions regarding the following key exchange methods in TLS, most of which have been superceded by better options:
+1. The document deprecates the use of RSA key exchange in TLS.
+2. Further, it limits the use of Diffie Hellman key exchange over a finite field,  such as to avoid known vulnerabilities or improper security properties.
+3. And lastly, it discourages the use of static elliptic curve Diffie Hellman cipher suites.
 
 --- middle
 
