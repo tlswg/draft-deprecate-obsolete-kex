@@ -149,6 +149,19 @@ informative:
     author:
       - ins: A. King
     date: 2020-07
+  MAY4:
+    title: "May the fourth be with you: A microarchitectural side channel attack on several real-world applications of curve25519"
+    target: https://dl.acm.org/doi/pdf/10.1145/3133956.3134029
+    author:
+      - ins: D. Genkin
+      - ins: L. Valenta
+      - ins: Y. Yarom
+  PARIS256:
+    title: "The PARIS256 Attack"
+    target: https://i.blackhat.com/us-18/Wed-August-8/us-18-Valsorda-Squeezing-A-Key-Through-A-Carry-Bit-wp.pdf
+    author:
+      - ins: S. Devlin
+      - ins: F. Valsorda
 author:
 -
       ins: C. Bartle
@@ -271,9 +284,31 @@ already considered bad practice since they do not provide forward secrecy. Howev
 Raccoon revealed that timing side channels in processing TLS premaster secrets may be
 exploited to reveal the encrypted premaster secret.
 
-For non-ephemeral elliptic curve DH cipher suites, invalid curve attacks similarly exploit secret reuse in order to break security. These attacks have been shown to be practical against real-world TLS
-implementations {{ICA}}. Therefore, this document discourages the reuse of elliptic
-curve DH public keys.
+As for non-ephemeral elliptic curve DH cipher suites, forgoing forward secrecy
+not only allows retroactive decryption in the event of key compromise, but may 
+also enable a broad category of attacks, where the attacker exploits key reuse
+to repeatedly query a cryptographic secret.
+This category includes, but is not necessarily limited to, the following
+examples:
+
+1. Invalid curve attacks, where the attacker exploits key reuse to repeatedly
+query, and eventually learn, the key itself. These attacks have been shown to be 
+practical against real-world TLS implementations {{ICA}}.
+
+2. Side channel attacks, where the attacker exploits key reuse and an additional
+side channel, to learn a cryptographic secret. As one example of such attacks,
+refer to {{MAY4}}.
+
+3. Fault attacks, where the attacker exploits key reuse and incorrect
+calcaultions to learn a cryptographic secret. As one example of such attacks,
+see {{PARIS256}}.
+
+Such attacks are often implementation-dependent, including the above examples.
+However, the above examples demonstrate that avoiding this category of attacks
+while reusing keys is difficult.
+In contrast, avoiding key reuse not only prevents decryption in the event of key 
+compromise, but also precludes this category of attacks altogether.
+Therefore, this document discourages the reuse of elliptic curve DH public keys.
 
 # Acknowledgments
 
