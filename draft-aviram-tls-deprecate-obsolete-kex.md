@@ -300,7 +300,7 @@ side channel, to learn a cryptographic secret. As one example of such attacks,
 refer to {{MAY4}}.
 
 3. Fault attacks, where the attacker exploits key reuse and incorrect
-calcaultions to learn a cryptographic secret. As one example of such attacks,
+calculations to learn a cryptographic secret. As one example of such attacks,
 see {{PARIS256}}.
 
 Such attacks are often implementation-dependent, including the above examples.
