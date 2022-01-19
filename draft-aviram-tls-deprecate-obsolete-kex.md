@@ -304,8 +304,8 @@ calculations to learn a cryptographic secret. As one example of such attacks,
 see {{PARIS256}}.
 
 Such attacks are often implementation-dependent, including the above examples.
-However, the above examples demonstrate that avoiding this category of attacks
-while reusing keys is difficult.
+However, these examples demonstrate that building a system that reuses keys and
+avoids this category of attacks is difficult in practice.
 In contrast, avoiding key reuse not only prevents decryption in the event of key 
 compromise, but also precludes this category of attacks altogether.
 Therefore, this document discourages the reuse of elliptic curve DH public keys.
