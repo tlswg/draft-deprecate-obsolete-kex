@@ -31,14 +31,6 @@ informative:
       - ins: T. Jager
       - ins: J. Schwenk
       - ins: J. Somorovsky
-  deprecate-ffdh:
-    title: "Deprecating FFDH Ciphersuites in TLS"
-    target: https://datatracker.ietf.org/doc/draft-bartle-tls-deprecate-ffdhe/
-    date: 2021-06
-    author:
-      - ins: C. Bartle
-      - ins: N. Aviram
-      - ins: F. Valsorda
   weak-dh:
     title: "Weak Diffie-Hellman and the Logjam Attack"
     target: https://weakdh.org/
@@ -285,14 +277,14 @@ Raccoon revealed that timing side channels in processing TLS premaster secrets m
 exploited to reveal the encrypted premaster secret.
 
 As for non-ephemeral elliptic curve DH cipher suites, forgoing forward secrecy
-not only allows retroactive decryption in the event of key compromise, but may 
+not only allows retroactive decryption in the event of key compromise, but may
 also enable a broad category of attacks, where the attacker exploits key reuse
 to repeatedly query a cryptographic secret.
 This category includes, but is not necessarily limited to, the following
 examples:
 
 1. Invalid curve attacks, where the attacker exploits key reuse to repeatedly
-query, and eventually learn, the key itself. These attacks have been shown to be 
+query, and eventually learn, the key itself. These attacks have been shown to be
 practical against real-world TLS implementations {{ICA}}.
 
 2. Side channel attacks, where the attacker exploits key reuse and an additional
@@ -306,7 +298,7 @@ see {{PARIS256}}.
 Such attacks are often implementation-dependent, including the above examples.
 However, these examples demonstrate that building a system that reuses keys and
 avoids this category of attacks is difficult in practice.
-In contrast, avoiding key reuse not only prevents decryption in the event of key 
+In contrast, avoiding key reuse not only prevents decryption in the event of key
 compromise, but also precludes this category of attacks altogether.
 Therefore, this document discourages the reuse of elliptic curve DH public keys.
 
