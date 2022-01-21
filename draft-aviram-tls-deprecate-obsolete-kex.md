@@ -168,63 +168,86 @@ author:
 
 --- abstract
 
-This document makes several prescriptions regarding the following key exchange methods in TLS, most of which have been superceded by better options:
+This document makes several prescriptions regarding the following key exchange
+methods in TLS, most of which have been superseded by better options:
 
-1. The document deprecates the use of RSA key exchange in TLS.
+1. This document deprecates the use of RSA key exchange in TLS.
 
-2. Further, it limits the use of Diffie Hellman key exchange over a finite field,  such as to avoid known vulnerabilities or improper security properties.
+2. It limits the use of Diffie Hellman key exchange over a finite field to avoid
+known vulnerabilities and improper security properties.
 
-3. And lastly, it discourages the use of static elliptic curve Diffie Hellman cipher suites.
+3. It discourages the use of static elliptic curve Diffie Hellman cipher suites.
 
 --- middle
 
 # Introduction
 
-TLS supports a variety of key exchange algorithms, including RSA and Diffie Hellman
-over a finite field, as well as elliptic curve Diffie Hellman (ECDH).
+TLS supports a variety of key exchange algorithms, including RSA, Diffie Hellman
+over a finite field, and elliptic curve Diffie Hellman (ECDH).
 
 Diffie Hellman key exchange, over any group, comes in ephemeral and
 non-ephemeral varieties. Non-ephemeral DH algorithms use static DH public keys
 included in the authenticating peer's certificate; see {{?RFC4492}} for discussion.
 In contrast, ephemeral DH algorithms use ephemeral DH public keys sent in the
 handshake and authenticated by the peer's certificate. Ephemeral and
-non-ephemeral finite field DH algorithms are called DHE and DH, respectively,
-and ephemeral and non-ephemeral elliptic curve DH algorithms are called ECDHE
-and ECDH, respectively {{?RFC4492}}.
+non-ephemeral finite field DH algorithms are called DHE and DH  (or FFDHE and FFDH),
+respectively, and ephemeral and non-ephemeral elliptic curve DH algorithms are called
+ECDHE and ECDH, respectively {{?RFC4492}}.
 
-In general, non-ephemeral cipher suites are not recommended due to their lack of forward secrecy. However, as demonstrated by the {{Raccoon}} attack on finite-field DH, public key reuse, either via non-ephemeral cipher suites or reused keys with ephemeral cipher suites, can lead to timing side channels that may leak connection secrets. For elliptic curve DH, invalid curve attacks similarly exploit secret reuse in order to break security {{ICA}}, further demonstrating the risk of reusing public keys. While both side channels can be avoided in implementations, experience shows that in practice, implementations may fail to thwart such attacks due to the complexity of the required mitigations.
+In general, non-ephemeral cipher suites are not recommended due to their lack of
+forward secrecy. However, as demonstrated by the {{Raccoon}} attack on finite-field
+DH, public key reuse, either via non-ephemeral cipher suites or reused keys with
+ephemeral cipher suites, can lead to timing side channels that may leak connection
+secrets. For elliptic curve DH, invalid curve attacks similarly exploit secret
+reuse in order to break security {{ICA}}, further demonstrating the risk of reusing
+public keys. While both side channels can be avoided in implementations, experience
+shows that in practice, implementations may fail to thwart such attacks due to the
+complexity and number of the required mitigations.
 
-Additionally, RSA key exchange suffers from security problems that are independent of implementation choices, as well as problems that stem purely from the difficulty of implementing security countermeasures correctly.
+Additionally, RSA key exchange suffers from security problems that are independent
+of implementation choices as well as problems that stem purely from the difficulty
+of implementing security countermeasures correctly.
 
 At a rough glance, the problems affecting FFDHE are as follows:
 
-1. FFDHE suffers from interoperability problems, because there is no mechanism for negotiating the group size, and some implementations only support small group sizes; see {{!RFC7919}}, Section 1.
+1. FFDHE suffers from interoperability problems because there is no mechanism for
+negotiating the group size, and some implementations only support small group sizes
+(see {{!RFC7919}}, Section 1).
 
-2. In practice, some operators use 1024 bit FFDHE groups, since this is the
-maximum size that ensures wide support; see {{!RFC7919}}, Section 1.
-This size leaves only a small security margin vs. the current discrete log record, which stands at 795 bits {{DLOG795}}.
+2. In practice, some operators use 1024-bit FFDHE groups since this is the
+maximum size that ensures wide support (see {{!RFC7919}}, Section 1).
+This size leaves only a small security margin vs. the current discrete log record,
+which stands at 795 bits {{DLOG795}}.
 
-3. Expanding on the previous point, a handful of very large computations would allow cheaply decrypting a relatively large fraction of FFDHE traffic
-{{weak-dh}}.
+3. Expanding on the previous point, just a handful of very large computations allow
+an attacker to cheaply decrypt a relatively large fraction of FFDHE traffic
+(namely, traffic encrypted using particular standardized groups) {{weak-dh}}.
 
-4. When secrets are not fully ephemeral, FFDHE suffers from the {{Raccoon}} side channel attack. Note that FFDH is inherently vulnerable to the Raccoon attack, unless constant-time mitigations are employed.
+4. When secrets are not fully ephemeral, FFDHE suffers from the {{Raccoon}} side
+channel attack. (Note that FFDH is inherently vulnerable to the Raccoon attack
+unless constant-time mitigations are employed.)
 
-5. FFDHE groups may have small subgroups, which may enable several attacks
+5. FFDHE groups may have small subgroups, which enables several attacks
 {{subgroups}}.
 
-And the problems affecting RSA key exchange are as follows:
+The problems affecting RSA key exchange are as follows:
 
 1. RSA key exchange offers no forward secrecy, by construction.
 
 2. RSA key exchange may be vulnerable to Bleichenbacher's attack {{BLEI}}.
-Experience shows that variants of this attack arise every few years, because
-implementing the relevant countermeasure correctly is difficult; see
-{{ROBOT}}, {{NEW-BLEI}}, {{DROWN}}.
+Experience shows that variants of this attack arise every few years because
+implementing the relevant countermeasure correctly is difficult (see
+{{ROBOT}}, {{NEW-BLEI}}, {{DROWN}}).
 
-3. In addition to the above point, there is no convenient mechanism in TLS for domain separation of keys. Therefore, a single endpoint that is vulnerable to Bleichenbacher's attack would affect all endpoints sharing the same RSA key; see
-{{XPROT}}, {{DROWN}}.
+3. In addition to the above point, there is no convenient mechanism in TLS for
+the domain separation of keys. Therefore, a single endpoint that is vulnerable to
+Bleichenbacher's attack would affect all endpoints sharing the same RSA key (see
+{{XPROT}}, {{DROWN}}).
 
-Given these problems, this document updates {{!RFC4346}}, {{!RFC5246}}, {{!RFC4162}}, {{!RFC6347}}, {{!RFC5932}}, {{!RFC5288}}, {{!RFC6209}}, {{!RFC6367}}, {{!RFC8422}}, {{!RFC5289}}, and {{!RFC5469}} to deprecate cipher suites with key reuse, prohibiting and discouraging their use.
+Given these problems, this document updates {{!RFC4346}}, {{!RFC5246}},
+{{!RFC4162}}, {{!RFC6347}}, {{!RFC5932}}, {{!RFC5288}}, {{!RFC6209}}, {{!RFC6367}},
+{{!RFC8422}}, {{!RFC5289}}, and {{!RFC5469}} to deprecate cipher suites with key
+reuse.
 
 ## Requirements
 
@@ -232,41 +255,55 @@ Given these problems, this document updates {{!RFC4346}}, {{!RFC5246}}, {{!RFC41
 
 # Non-Ephemeral Diffie Hellman {#non-ephemeral}
 
-Clients MUST NOT offer non-ephemeral DH cipher suites in TLS 1.2 connections. (Note that
-TLS 1.0 and 1.1 are deprecated by {{!RFC8996}}.) This includes all cipher suites listed in the table in {{appendix-dh}}.
+Clients MUST NOT offer non-ephemeral FFDH cipher suites in TLS 1.2 connections.
+(Note that TLS 1.0 and 1.1 are deprecated by {{!RFC8996}} and TLS 1.3 does not
+support FFDH {{!RFC8446}}.) This includes all cipher suites listed in the table in
+{{appendix-dh}}.
 
 Clients SHOULD NOT offer non-ephemeral ECDH cipher suites in TLS 1.2
-connections. (Note that TLS 1.0 and 1.1 are deprecated by {{!RFC8996}}.) This
-includes all cipher suites listed in the table in {{appendix-ecdh}}.
+connections. (Note that TLS 1.0 and 1.1 are deprecated by {{!RFC8996}} and
+TLS 1.3 does not support ECDH {{!RFC8446}}.) This includes all cipher suites listed
+in the table in {{appendix-ecdh}}.
 
 # Ephemeral Finite Field Diffie Hellman {#dhe}
 
-Clients and servers MAY offer fully ephemeral FFDHE cipher suites in TLS 1.2 connections (TLS 1.0 and 1.1 are deprecated by {{!RFC8996}}), under the following conditions:
+Clients and servers MAY offer fully ephemeral FFDHE cipher suites in TLS 1.2
+connections under the following conditions:
 
-1. Clients and servers MUST NOT reuse ephemeral DHE public keys across TLS connections for all existing (and future) TLS versions. Doing so invalidates forward secrecy properties of these connections. For DHE, such reuse may also lead to vulnerabilities such as those used in the {{Raccoon}} attack. See {{sec-considerations}} for related discussion.
+1. Clients and servers MUST NOT reuse ephemeral DHE public keys across TLS
+connections for all existing (and future) TLS versions. Doing so invalidates
+forward secrecy properties of these connections. For DHE, such reuse may also
+lead to vulnerabilities such as those used in the {{Raccoon}} attack. See
+{{sec-considerations}} for related discussion.
 
 2. The group is one of the following well-known groups described in {{!RFC7919}}:
 ffdhe2048, ffdhe3072, ffdhe4096, ffdhe6144, ffdhe8192.
 
-We note that previously, supporting the broadest range of clients would have required supporting either RSA key exchange, or 1024-bit FFDHE.
-This is no longer the case, and it is possible to support most clients released
-since circa 2015 using 2048-bit FFDHE, or more modern key exchange methods, and
-without RSA key exchange {{server_side_tls}}.
+(Note that TLS 1.0 and 1.1 are deprecated by {{!RFC8996}}. TLS 1.3 satisfies the
+second point above {{!RFC8446}} and is not vulnerable to the {{Raccoon}} Attack.)
 
-The above requirements apply to all cipher suites listed in the table in {{appendix-dhe}}.
+We note that, previously, supporting the broadest range of clients would have
+required supporting either RSA key exchange or 1024-bit FFDHE. This is no longer
+the case, and it is possible to support most clients released since circa 2015
+using 2048-bit FFDHE or more modern key exchange methods, and without RSA key
+exchange {{server_side_tls}}.
+
+All the cipher suites that do not meet the above requirements are listed in the
+table in {{appendix-dhe}}.
 
 # RSA {#rsa}
 
-Clients and servers MUST NOT offer RSA cipher suites in TLS 1.2
-connections. (Note that TLS 1.0 and 1.1 are deprecated by {{!RFC8996}}.). This includes all cipher suites listed in the table in {{appendix-rsa}}.
-Note that these cipher suites are already marked as not recommended in the "TLS
-Cipher Suites" registry.
+Clients and servers MUST NOT offer RSA cipher suites in TLS 1.2 connections. (Note
+that TLS 1.0 and 1.1 are deprecated by {{!RFC8996}}, and TLS 1.3 does not support
+static RSA {{!RFC8446}}.) This includes all cipher suites listed in the table in
+{{appendix-rsa}}. Note that these cipher suites are already marked as not
+recommended in the "TLS Cipher Suites" registry.
 
 # IANA Considerations
 
 This document makes no requests to IANA. Note that all cipher suites listed in
-{{rsa}} and in {{non-ephemeral}} are already marked as not recommended in the "TLS Cipher Suites"
-registry.
+{{rsa}} and in {{non-ephemeral}} are already marked as not recommended in the
+"TLS Cipher Suites" registry.
 
 # Security Considerations {#sec-considerations}
 
@@ -277,18 +314,19 @@ Raccoon revealed that timing side channels in processing TLS premaster secrets m
 exploited to reveal the encrypted premaster secret.
 
 As for non-ephemeral elliptic curve DH cipher suites, forgoing forward secrecy
-not only allows retroactive decryption in the event of key compromise, but may
-also enable a broad category of attacks, where the attacker exploits key reuse
+not only allows retroactive decryption in the event of key compromise but may
+also enable a broad category of attacks where the attacker exploits key reuse
 to repeatedly query a cryptographic secret.
+
 This category includes, but is not necessarily limited to, the following
 examples:
 
 1. Invalid curve attacks, where the attacker exploits key reuse to repeatedly
-query, and eventually learn, the key itself. These attacks have been shown to be
+query and eventually learn the key itself. These attacks have been shown to be
 practical against real-world TLS implementations {{ICA}}.
 
 2. Side channel attacks, where the attacker exploits key reuse and an additional
-side channel, to learn a cryptographic secret. As one example of such attacks,
+side channel to learn a cryptographic secret. As one example of such attacks,
 refer to {{MAY4}}.
 
 3. Fault attacks, where the attacker exploits key reuse and incorrect
@@ -297,14 +335,14 @@ see {{PARIS256}}.
 
 Such attacks are often implementation-dependent, including the above examples.
 However, these examples demonstrate that building a system that reuses keys and
-avoids this category of attacks is difficult in practice.
-In contrast, avoiding key reuse not only prevents decryption in the event of key
-compromise, but also precludes this category of attacks altogether.
-Therefore, this document discourages the reuse of elliptic curve DH public keys.
+avoids this category of attacks is difficult in practice. In contrast, avoiding
+key reuse not only prevents decryption in the event of key compromise, but also
+precludes this category of attacks altogether. Therefore, this document
+discourages the reuse of elliptic curve DH public keys.
 
 # Acknowledgments
 
-This document was inspired by discussion on the TLS WG mailing list and
+This document was inspired by discussions on the TLS WG mailing list and
 a suggestion by Filippo Valsorda following the release of the {{Raccoon}} attack.
 Thanks to Christopher A. Wood for writing up the initial draft of this document.
 
