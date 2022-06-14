@@ -1,7 +1,7 @@
 ---
 title: Deprecating Obsolete Key Exchange Methods in TLS
 abbrev: Deprecating RSA and FFDH(E)
-docname: draft-aviram-tls-deprecate-obsolete-kex-latest
+docname: draft-ietf-tls-deprecate-obsolete-kex-latest
 date:
 category: std
 
@@ -246,8 +246,7 @@ Bleichenbacher's attack would affect all endpoints sharing the same RSA key (see
 
 Given these problems, this document updates {{!RFC4346}}, {{!RFC5246}},
 {{!RFC4162}}, {{!RFC6347}}, {{!RFC5932}}, {{!RFC5288}}, {{!RFC6209}}, {{!RFC6367}},
-{{!RFC8422}}, {{!RFC5289}}, and {{!RFC5469}} to deprecate cipher suites with key
-reuse.
+{{!RFC8422}}, {{!RFC5289}}, and {{!RFC5469}} to remediate the above problems.
 
 ## Requirements
 
