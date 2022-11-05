@@ -173,8 +173,7 @@ methods in TLS, most of which have been superseded by better options:
 
 1. This document deprecates the use of RSA key exchange in TLS.
 
-2. It limits the use of Diffie Hellman key exchange over a finite field to avoid
-known vulnerabilities and improper security properties.
+2. It limits the use of Diffie Hellman key exchange over a finite field to avoid, to the extent possible, known vulnerabilities and improper security properties.
 
 3. It discourages the use of static elliptic curve Diffie Hellman cipher suites.
 
@@ -275,8 +274,7 @@ forward secrecy properties of these connections. For DHE, such reuse may also
 lead to vulnerabilities such as those used in the {{Raccoon}} attack. See
 {{sec-considerations}} for related discussion.
 
-2. The group is one of the following well-known groups described in {{!RFC7919}}:
-ffdhe2048, ffdhe3072, ffdhe4096, ffdhe6144, ffdhe8192.
+2. The group size is at least 2048 bits.
 
 (Note that TLS 1.0 and 1.1 are deprecated by {{!RFC8996}}. TLS 1.3 satisfies the
 second point above {{!RFC8446}} and is not vulnerable to the {{Raccoon}} Attack.)
