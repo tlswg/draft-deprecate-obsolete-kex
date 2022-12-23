@@ -1,5 +1,5 @@
 ---
-title: Deprecating Obsolete Key Exchange Methods in TLS
+title: Deprecating Obsolete Key Exchange Methods in TLS 1.2
 abbrev: Deprecating RSA and FFDH(E)
 docname: draft-ietf-tls-deprecate-obsolete-kex-latest
 date:
@@ -158,8 +158,8 @@ author:
 -
       ins: C. Bartle
       name: Carrick Bartle
-      organization: Apple, Inc.
-      email: cbartle@apple.com
+      organization: Roblox
+      email: cbartle@roblox.com
 -
       ins: N. Aviram
       name: Nimrod Aviram
@@ -171,17 +171,23 @@ author:
 This document makes several prescriptions regarding the following key exchange
 methods in TLS, most of which have been superseded by better options:
 
-1. This document deprecates the use of RSA key exchange in TLS.
+1. This document deprecates the use of RSA key exchange.
 
-2. It limits the use of Diffie Hellman key exchange over a finite field to avoid, to the extent possible, known vulnerabilities and improper security properties.
+2. It limits the use of Diffie Hellman key exchange over a finite field to
+avoid, to the fullest extent possible, known vulnerabilities and improper
+security properties.
 
 3. It discourages the use of static elliptic curve Diffie Hellman cipher suites.
+
+Note that these prescriptions apply only to TLS 1.2 since TLS 1.0 and 1.1 are
+deprecated by {{!RFC8996}} and TLS 1.3 either does not use the affected
+algorithm or does not share the relevant configuration options.
 
 --- middle
 
 # Introduction
 
-TLS supports a variety of key exchange algorithms, including RSA, Diffie Hellman
+TLS 1.2 supports a variety of key exchange algorithms, including RSA, Diffie Hellman
 over a finite field, and elliptic curve Diffie Hellman (ECDH).
 
 Diffie Hellman key exchange, over any group, comes in ephemeral and
@@ -207,11 +213,11 @@ Additionally, RSA key exchange suffers from security problems that are independe
 of implementation choices as well as problems that stem purely from the difficulty
 of implementing security countermeasures correctly.
 
-At a rough glance, the problems affecting FFDHE are as follows:
+At a rough glance, the problems affecting FFDHE in TLS 1.2 are as follows:
 
-1. FFDHE suffers from interoperability problems because there is no mechanism for
-negotiating the group size, and some implementations only support small group sizes
-(see {{!RFC7919}}, Section 1).
+1. FFDHE suffers from interoperability problems because there is no mechanism
+for negotiating the group size, and some implementations only support small
+group sizes (see {{!RFC7919}}, Section 1).
 
 2. In practice, some operators use 1024-bit FFDHE groups since this is the
 maximum size that ensures wide support (see {{!RFC7919}}, Section 1).
@@ -229,7 +235,7 @@ unless constant-time mitigations are employed.)
 5. FFDHE groups may have small subgroups, which enables several attacks
 {{subgroups}}.
 
-The problems affecting RSA key exchange are as follows:
+The problems affecting RSA key exchange in TLS 1.2 are as follows:
 
 1. RSA key exchange offers no forward secrecy, by construction.
 
@@ -238,7 +244,7 @@ Experience shows that variants of this attack arise every few years because
 implementing the relevant countermeasure correctly is difficult (see
 {{ROBOT}}, {{NEW-BLEI}}, {{DROWN}}).
 
-3. In addition to the above point, there is no convenient mechanism in TLS for
+3. In addition to the above point, there is no convenient mechanism in TLS 1.2 for
 the domain separation of keys. Therefore, a single endpoint that is vulnerable to
 Bleichenbacher's attack would affect all endpoints sharing the same RSA key (see
 {{XPROT}}, {{DROWN}}).
