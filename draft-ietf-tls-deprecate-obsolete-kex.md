@@ -533,6 +533,8 @@ Thanks to Christopher A. Wood for writing up the initial draft of this document.
 | TLS_DHE_PSK_WITH_AES_256_CCM | {{!RFC6655}} |
 | TLS_DHE_RSA_WITH_CHACHA20_POLY1305_SHA256 | {{!RFC7905}} |
 | TLS_DHE_PSK_WITH_CHACHA20_POLY1305_SHA256 | {{!RFC7905}} |
+| TLS_PSK_DHE_WITH_AES_128_CCM_8 | {{!RFC6655}} |
+| TLS_PSK_DHE_WITH_AES_256_CCM_8 | {{!RFC6655}} |
 
 # RSA Cipher Suites Deprecated by This Document {#appendix-rsa}
 
