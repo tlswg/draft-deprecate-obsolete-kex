@@ -348,6 +348,8 @@ discourages the reuse of elliptic curve DH public keys.
 This document was inspired by discussions on the TLS WG mailing list and
 a suggestion by Filippo Valsorda following the release of the {{Raccoon}} attack.
 Thanks to Christopher A. Wood for writing up the initial draft of this document.
+Thanks also to {{{John Preuß Mattsson}}} and {{{Manuel Pégourié-Gonnard}}} for
+comments and suggestions.
 
 --- back
 
