@@ -168,16 +168,7 @@ author:
 
 --- abstract
 
-This document makes several prescriptions regarding the following key exchange
-methods in TLS, most of which have been superseded by better options:
-
-1. This document deprecates the use of RSA key exchange.
-
-2. It limits the use of Diffie Hellman key exchange over a finite field to
-avoid, to the fullest extent possible, known vulnerabilities and improper
-security properties.
-
-3. It discourages the use of static elliptic curve Diffie Hellman cipher suites.
+This document deprecates the use of RSA key exchange and Diffie Hellman over a finite field in TLS 1.2, and discourages the use of static elliptic curve Diffie Hellman cipher suites.
 
 Note that these prescriptions apply only to TLS 1.2 since TLS 1.0 and 1.1 are
 deprecated by {{!RFC8996}} and TLS 1.3 either does not use the affected
@@ -200,7 +191,7 @@ respectively, and ephemeral and non-ephemeral elliptic curve DH algorithms are c
 ECDHE and ECDH, respectively {{?RFC4492}}.
 
 In general, non-ephemeral cipher suites are not recommended due to their lack of
-forward secrecy. However, as demonstrated by the {{Raccoon}} attack on finite-field
+forward secrecy. Moreover, as demonstrated by the {{Raccoon}} attack on finite-field
 DH, public key reuse, either via non-ephemeral cipher suites or reused keys with
 ephemeral cipher suites, can lead to timing side channels that may leak connection
 secrets. For elliptic curve DH, invalid curve attacks similarly exploit secret
@@ -215,25 +206,26 @@ of implementing security countermeasures correctly.
 
 At a rough glance, the problems affecting FFDHE in TLS 1.2 are as follows:
 
-1. FFDHE suffers from interoperability problems because there is no mechanism
-for negotiating the group size, and some implementations only support small
-group sizes (see {{!RFC7919}}, Section 1).
+1. FFDHE suffers from interoperability problems because there is no mechanism for
+negotiating the group, and some implementations only support small group sizes
+(see {{!RFC7919}}, Section 1).
 
-2. In practice, some operators use 1024-bit FFDHE groups since this is the
+2. FFDHE groups may have small subgroups, which enables several attacks
+{{subgroups}}. When presented with a custom, non-standardized FFDHE group, a handshaking client cannot practically verify that the group chosen by the server does not suffer from this problem. There is also no mechanism for such handshakes to fall back to other key exchange parameters that are acceptable to the client.
+Custom FFDHE groups are widespread (as a result of advice based on {{weak-dh}}). 
+
+3. In practice, some operators use 1024-bit FFDHE groups since this is the
 maximum size that ensures wide support (see {{!RFC7919}}, Section 1).
 This size leaves only a small security margin vs. the current discrete log record,
 which stands at 795 bits {{DLOG795}}.
 
-3. Expanding on the previous point, just a handful of very large computations allow
+4. Expanding on the previous point, just a handful of very large computations allow
 an attacker to cheaply decrypt a relatively large fraction of FFDHE traffic
 (namely, traffic encrypted using particular standardized groups) {{weak-dh}}.
 
-4. When secrets are not fully ephemeral, FFDHE suffers from the {{Raccoon}} side
+5. When secrets are not fully ephemeral, FFDHE suffers from the {{Raccoon}} side
 channel attack. (Note that FFDH is inherently vulnerable to the Raccoon attack
 unless constant-time mitigations are employed.)
-
-5. FFDHE groups may have small subgroups, which enables several attacks
-{{subgroups}}.
 
 The problems affecting RSA key exchange in TLS 1.2 are as follows:
 
@@ -259,40 +251,21 @@ Given these problems, this document updates {{!RFC4346}}, {{!RFC5246}},
 
 # Non-Ephemeral Diffie Hellman {#non-ephemeral}
 
-Clients MUST NOT offer non-ephemeral FFDH cipher suites in TLS 1.2 connections.
+Clients and servers MUST NOT offer non-ephemeral FFDH cipher suites in TLS 1.2 connections.
 (Note that TLS 1.0 and 1.1 are deprecated by {{!RFC8996}} and TLS 1.3 does not
 support FFDH {{!RFC8446}}.) This includes all cipher suites listed in the table in
 {{appendix-dh}}.
 
-Clients SHOULD NOT offer non-ephemeral ECDH cipher suites in TLS 1.2
+Clients and servers SHOULD NOT offer non-ephemeral ECDH cipher suites in TLS 1.2
 connections. (Note that TLS 1.0 and 1.1 are deprecated by {{!RFC8996}} and
 TLS 1.3 does not support ECDH {{!RFC8446}}.) This includes all cipher suites listed
 in the table in {{appendix-ecdh}}.
 
 # Ephemeral Finite Field Diffie Hellman {#dhe}
 
-Clients and servers MAY offer fully ephemeral FFDHE cipher suites in TLS 1.2
-connections under the following conditions:
-
-1. Clients and servers MUST NOT reuse ephemeral DHE public keys across TLS
-connections for all existing (and future) TLS versions. Doing so invalidates
-forward secrecy properties of these connections. For DHE, such reuse may also
-lead to vulnerabilities such as those used in the {{Raccoon}} attack. See
-{{sec-considerations}} for related discussion.
-
-2. The group size is at least 2048 bits.
-
-(Note that TLS 1.0 and 1.1 are deprecated by {{!RFC8996}}. TLS 1.3 satisfies the
-second point above {{!RFC8446}} and is not vulnerable to the {{Raccoon}} Attack.)
-
-We note that, previously, supporting the broadest range of clients would have
-required supporting either RSA key exchange or 1024-bit FFDHE. This is no longer
-the case, and it is possible to support most clients released since circa 2015
-using 2048-bit FFDHE or more modern key exchange methods, and without RSA key
-exchange {{server_side_tls}}.
-
-All the cipher suites that do not meet the above requirements are listed in the
-table in {{appendix-dhe}}.
+Clients and servers MUST NOT offer FFDHE cipher suites in TLS 1.2 connections.
+This includes all cipher suites listed in the table in {{appendix-dhe}}.
+(Note that TLS 1.0 and 1.1 are deprecated by {{!RFC8996}}.) FFDHE cipher suites in TLS 1.3 do not suffer from the above problems {{!RFC8446}}. Therefore, clients MAY offer FFDHE cipher suites in TLS 1.3 connections
 
 # RSA {#rsa}
 
@@ -304,9 +277,10 @@ recommended in the "TLS Cipher Suites" registry.
 
 # IANA Considerations
 
-This document makes no requests to IANA. Note that all cipher suites listed in
-{{rsa}} and in {{non-ephemeral}} are already marked as not recommended in the
-"TLS Cipher Suites" registry.
+This document requests IANA to mark the cipher suites listed in {{appendix-dhe}} as not recommended in the "TLS Cipher Suites" registry.
+Note that all cipher suites listed in
+{{appendix-dh}} and in {{appendix-rsa}} are already marked as not recommended in the
+registry.
 
 # Security Considerations {#sec-considerations}
 
@@ -342,6 +316,8 @@ avoids this category of attacks is difficult in practice. In contrast, avoiding
 key reuse not only prevents decryption in the event of key compromise, but also
 precludes this category of attacks altogether. Therefore, this document
 discourages the reuse of elliptic curve DH public keys.
+
+As for ephemeral finite field Diffie-Hellman in TLS 1.2, as explained above, clients have no practical way to support these cipher suites while ensuring they only negotiate security parameters that are acceptable to them. In TLS 1.2, the server chooses the Diffie-Hellman group, and custom groups are prevalent. Therefore, once the client includes these cipher suites in its handshake and the server presents a custom group, the client cannot complete the handshake while ensuring security. Verifying the group structure is prohibitively expensive for the client. Using a safelist of known-good groups is also impractical, since server operators were encouraged to generate their own custom group. Further, there is no mechanism for the handshake to fall back to other parameters, that are acceptable to both the client and server.
 
 # Acknowledgments
 
@@ -464,7 +440,7 @@ comments and suggestions.
 | TLS_ECDH_RSA_WITH_CAMELLIA_128_GCM_SHA256 | {{!RFC6367}} |
 | TLS_ECDH_RSA_WITH_CAMELLIA_256_GCM_SHA384 | {{!RFC6367}} |
 
-# DHE Cipher Suites Refered to by This Document {#appendix-dhe}
+# DHE Cipher Suites deprecated by This Document {#appendix-dhe}
 
 | Ciphersuite  | Reference |
 |:-|:-|
