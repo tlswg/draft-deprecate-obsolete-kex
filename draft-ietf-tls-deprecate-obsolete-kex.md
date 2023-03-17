@@ -265,7 +265,7 @@ in the table in {{appendix-ecdh}}.
 
 Clients and servers MUST NOT offer FFDHE cipher suites in TLS 1.2 connections.
 This includes all cipher suites listed in the table in {{appendix-dhe}}.
-(Note that TLS 1.0 and 1.1 are deprecated by {{!RFC8996}}.) FFDHE cipher suites in TLS 1.3 do not suffer from the above problems {{!RFC8446}}. Therefore, clients MAY offer FFDHE cipher suites in TLS 1.3 connections
+(Note that TLS 1.0 and 1.1 are deprecated by {{!RFC8996}}.) FFDHE cipher suites in TLS 1.3 do not suffer from the above problems {{!RFC8446}}. Therefore, clients and servers MAY offer FFDHE cipher suites in TLS 1.3 connections
 
 # RSA {#rsa}
 
