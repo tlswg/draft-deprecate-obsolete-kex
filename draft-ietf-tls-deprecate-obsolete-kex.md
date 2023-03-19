@@ -176,7 +176,7 @@ algorithm or does not share the relevant configuration options.
 
 --- middle
 
-# Introduction
+# Introduction {#introduction}
 
 TLS 1.2 supports a variety of key exchange algorithms, including RSA, Diffie Hellman
 over a finite field, and elliptic curve Diffie Hellman (ECDH).
@@ -212,7 +212,8 @@ negotiating the group, and some implementations only support small group sizes
 
 2. FFDHE groups may have small subgroups, which enables several attacks
 {{subgroups}}. When presented with a custom, non-standardized FFDHE group, a handshaking client cannot practically verify that the group chosen by the server does not suffer from this problem. There is also no mechanism for such handshakes to fall back to other key exchange parameters that are acceptable to the client.
-Custom FFDHE groups are widespread (as a result of advice based on {{weak-dh}}). 
+Custom FFDHE groups are widespread (as a result of advice based on {{weak-dh}}).
+Therefore, clients cannot simply reject handshakes that present custom, and thus potentially dangerous, groups.
 
 3. In practice, some operators use 1024-bit FFDHE groups since this is the
 maximum size that ensures wide support (see {{!RFC7919}}, Section 1).
@@ -251,29 +252,28 @@ Given these problems, this document updates {{!RFC4346}}, {{!RFC5246}},
 
 # Non-Ephemeral Diffie Hellman {#non-ephemeral}
 
-Clients and servers MUST NOT offer non-ephemeral FFDH cipher suites in TLS 1.2 connections.
+Clients MUST NOT offer and servers MUST NOT select non-ephemeral FFDH cipher suites in TLS 1.2 connections.
 (Note that TLS 1.0 and 1.1 are deprecated by {{!RFC8996}} and TLS 1.3 does not
 support FFDH {{!RFC8446}}.) This includes all cipher suites listed in the table in
 {{appendix-dh}}.
 
-Clients and servers SHOULD NOT offer non-ephemeral ECDH cipher suites in TLS 1.2
-connections. (Note that TLS 1.0 and 1.1 are deprecated by {{!RFC8996}} and
+Clients SHOULD NOT offer and servers SHOULD NOT select non-ephemeral ECDH cipher suites in TLS 1.2 connections. (Note that TLS 1.0 and 1.1 are deprecated by {{!RFC8996}} and
 TLS 1.3 does not support ECDH {{!RFC8446}}.) This includes all cipher suites listed
 in the table in {{appendix-ecdh}}.
 
 # Ephemeral Finite Field Diffie Hellman {#dhe}
 
-Clients and servers MUST NOT offer FFDHE cipher suites in TLS 1.2 connections.
+Clients MUST NOT offer and servers MUST NOT select FFDHE cipher suites in TLS 1.2 connections.
 This includes all cipher suites listed in the table in {{appendix-dhe}}.
-(Note that TLS 1.0 and 1.1 are deprecated by {{!RFC8996}}.) FFDHE cipher suites in TLS 1.3 do not suffer from the above problems {{!RFC8446}}. Therefore, clients and servers MAY offer FFDHE cipher suites in TLS 1.3 connections
+(Note that TLS 1.0 and 1.1 are deprecated by {{!RFC8996}}.) FFDHE cipher suites in TLS 1.3 do not suffer from the problems presented in {{introduction}}; see {{!RFC8446}}. Therefore, clients and servers MAY offer FFDHE cipher suites in TLS 1.3 connections.
 
 # RSA {#rsa}
 
-Clients and servers MUST NOT offer RSA cipher suites in TLS 1.2 connections. (Note
-that TLS 1.0 and 1.1 are deprecated by {{!RFC8996}}, and TLS 1.3 does not support
-static RSA {{!RFC8446}}.) This includes all cipher suites listed in the table in
-{{appendix-rsa}}. Note that these cipher suites are already marked as not
-recommended in the "TLS Cipher Suites" registry.
+Clients MUST NOT offer and servers MUST NOT select RSA cipher suites in TLS 1.2
+connections. (Note that TLS 1.0 and 1.1 are deprecated by {{!RFC8996}}, and TLS
+1.3 does not support static RSA {{!RFC8446}}.) This includes all cipher suites
+listed in the table in {{appendix-rsa}}. Note that these cipher suites are
+already marked as not recommended in the "TLS Cipher Suites" registry.
 
 # IANA Considerations
 
