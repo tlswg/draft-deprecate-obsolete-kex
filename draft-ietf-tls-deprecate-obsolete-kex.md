@@ -4,6 +4,7 @@ abbrev: Deprecating RSA and FFDH(E)
 docname: draft-ietf-tls-deprecate-obsolete-kex-latest
 date:
 category: std
+updates: 9325, 4346, 5246, 4162, 6347, 5932, 5288, 6209, 6367, 8422, 5289, 5469
 
 ipr: trust200902
 keyword: Internet-Draft
@@ -242,7 +243,7 @@ the domain separation of keys. Therefore, a single endpoint that is vulnerable t
 Bleichenbacher's attack would affect all endpoints sharing the same RSA key (see
 {{XPROT}}, {{DROWN}}).
 
-Given these problems, this document updates {{!RFC4346}}, {{!RFC5246}},
+Given these problems, this document updates {{!RFC9325}}, {{!RFC4346}}, {{!RFC5246}},
 {{!RFC4162}}, {{!RFC6347}}, {{!RFC5932}}, {{!RFC5288}}, {{!RFC6209}}, {{!RFC6367}},
 {{!RFC8422}}, {{!RFC5289}}, and {{!RFC5469}} to remediate the above problems.
 
@@ -257,7 +258,8 @@ Clients MUST NOT offer and servers MUST NOT select non-ephemeral FFDH cipher sui
 support FFDH {{!RFC8446}}.) This includes all cipher suites listed in the table in
 {{appendix-dh}}.
 
-Clients SHOULD NOT offer and servers SHOULD NOT select non-ephemeral ECDH cipher suites in TLS 1.2 connections. (Note that TLS 1.0 and 1.1 are deprecated by {{!RFC8996}} and
+Clients SHOULD NOT offer and servers SHOULD NOT select non-ephemeral ECDH cipher suites in TLS 1.2 connections. (This requirement is already present in {{!RFC9325}}.
+Note that TLS 1.0 and 1.1 are deprecated by {{!RFC8996}} and
 TLS 1.3 does not support ECDH {{!RFC8446}}.) This includes all cipher suites listed
 in the table in {{appendix-ecdh}}.
 
@@ -324,7 +326,7 @@ As for ephemeral finite field Diffie-Hellman in TLS 1.2, as explained above, cli
 This document was inspired by discussions on the TLS WG mailing list and
 a suggestion by Filippo Valsorda following the release of the {{Raccoon}} attack.
 Thanks to Christopher A. Wood for writing up the initial draft of this document.
-Thanks also to {{{John Preuß Mattsson}}} and {{{Manuel Pégourié-Gonnard}}} for
+Thanks also to Thomas Fossati, {{{John Preuß Mattsson}}} and {{{Manuel Pégourié-Gonnard}}} for
 comments and suggestions.
 
 --- back
