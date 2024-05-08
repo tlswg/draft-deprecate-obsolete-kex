@@ -279,7 +279,7 @@ already marked as not recommended in the "TLS Cipher Suites" registry.
 
 # IANA Considerations
 
-This document requests IANA to mark the cipher suites listed in {{appendix-dh}}, {{appendix-ecdh}}, {{appendix-dhe}} and in {{appendix-rsa}} as "D" in the "Recommended" column in the "TLS Cipher Suites" registry.
+This document requests IANA to mark the cipher suites listed in {{appendix-dh}}, {{appendix-ecdh}}, {{appendix-dhe}} and in {{appendix-rsa}} as "D" in the "Recommended" column, see {{I-D.ietf-tls-rfc8447bis}}, in the "TLS Cipher Suites" registry.
 
 # Security Considerations {#sec-considerations}
 
