@@ -255,25 +255,25 @@ Given these problems, this document updates {{!RFC9325}}, {{!RFC4346}}, {{!RFC52
 
 Clients MUST NOT offer and servers MUST NOT select non-ephemeral FFDH cipher suites in TLS 1.2 connections.
 (Note that TLS 1.0 and 1.1 are deprecated by {{!RFC8996}} and TLS 1.3 does not
-support FFDH {{!RFC8446}}.) This includes all cipher suites listed in the table in
+support FFDH {{!I-D.ietf-tls-rfc8446bis}}.) This includes all cipher suites listed in the table in
 {{appendix-dh}}.
 
 Clients SHOULD NOT offer and servers SHOULD NOT select non-ephemeral ECDH cipher suites in TLS 1.2 connections. (This requirement is already present in {{!RFC9325}}.
 Note that TLS 1.0 and 1.1 are deprecated by {{!RFC8996}} and
-TLS 1.3 does not support ECDH {{!RFC8446}}.) This includes all cipher suites listed
+TLS 1.3 does not support ECDH {{!I-D.ietf-tls-rfc8446bis}}.) This includes all cipher suites listed
 in the table in {{appendix-ecdh}}.
 
 # Ephemeral Finite Field Diffie Hellman {#dhe}
 
 Clients MUST NOT offer and servers MUST NOT select FFDHE cipher suites in TLS 1.2 connections.
 This includes all cipher suites listed in the table in {{appendix-dhe}}.
-(Note that TLS 1.0 and 1.1 are deprecated by {{!RFC8996}}.) FFDHE cipher suites in TLS 1.3 do not suffer from the problems presented in {{introduction}}; see {{!RFC8446}}. Therefore, clients and servers MAY offer FFDHE cipher suites in TLS 1.3 connections.
+(Note that TLS 1.0 and 1.1 are deprecated by {{!RFC8996}}.) FFDHE cipher suites in TLS 1.3 do not suffer from the problems presented in {{introduction}}; see {{!I-D.ietf-tls-rfc8446bis}}. Therefore, clients and servers MAY offer FFDHE cipher suites in TLS 1.3 connections.
 
 # RSA {#rsa}
 
 Clients MUST NOT offer and servers MUST NOT select RSA cipher suites in TLS 1.2
 connections. (Note that TLS 1.0 and 1.1 are deprecated by {{!RFC8996}}, and TLS
-1.3 does not support static RSA {{!RFC8446}}.) This includes all cipher suites
+1.3 does not support static RSA {{!I-D.ietf-tls-rfc8446bis}}.) This includes all cipher suites
 listed in the table in {{appendix-rsa}}. Note that these cipher suites are
 already marked as not recommended in the "TLS Cipher Suites" registry.
 
