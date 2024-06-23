@@ -263,6 +263,8 @@ Note that TLS 1.0 and 1.1 are deprecated by {{!RFC8996}} and
 TLS 1.3 does not support ECDH {{!I-D.ietf-tls-rfc8446bis}}.) This includes all cipher suites listed
 in the table in {{appendix-ecdh}}.
 
+In addition, to avoid the use of non-ephemeral Diffie Hellman, clients SHOULD NOT use use and server SHOULD NOT accept certificates with fixed DH parameters. These certificate types are rsa_fixed_dh, dss_fixed_dh, rsa_fixed_ecdh and ecdsa_fixed_ecdh. These values only apply to TLS versions of 1.2 and below.
+
 # Ephemeral Finite Field Diffie Hellman {#dhe}
 
 Clients MUST NOT offer and servers MUST NOT select FFDHE cipher suites in TLS 1.2 connections.
@@ -280,6 +282,13 @@ already marked as not recommended in the "TLS Cipher Suites" registry.
 # IANA Considerations
 
 This document requests IANA to mark the cipher suites listed in {{appendix-dh}}, {{appendix-ecdh}}, {{appendix-dhe}} and in {{appendix-rsa}} as "D" in the "Recommended" column, see {{I-D.ietf-tls-rfc8447bis}}, in the "TLS Cipher Suites" registry.
+
+This document also requests IANA to populate a "D" in the recommended column of the TLS ClientCertificateType Identifiers for the following certificate types:
+
+- rsa_fixed_dh (3)
+- dss_fixed_dh (4)
+- rsa_fixed_ecdh (65)
+- ecdsa_fixed_ecdh (66)
 
 # Security Considerations {#sec-considerations}
 
