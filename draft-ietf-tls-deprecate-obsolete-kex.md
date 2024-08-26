@@ -2,16 +2,18 @@
 title: Deprecating Obsolete Key Exchange Methods in TLS 1.2
 abbrev: Deprecating RSA and FFDH(E)
 docname: draft-ietf-tls-deprecate-obsolete-kex-latest
-date:
+submissionType: IETF
 category: std
-updates: 9325, 4346, 5246, 4162, 6347, 5932, 5288, 6209, 6367, 8422, 5289, 5469
-
+updates: 9325, 4346, 5246, 4162, 6347, 5932, 5288, 6209, 6367, 8422, 5289, 5469, 4785, 4279, 5487, 6655, 7509
+date:
+number:
+area: security
+workgroup: TLS Working Group
 ipr: trust200902
-keyword: Internet-Draft
-
+keyword:
+v: 3
 stand_alone: yes
 pi: [toc, sortrefs, symrefs]
-
 informative:
   Raccoon:
     title: "Raccoon Attack: Finding and Exploiting Most-Significant-Bit-Oracles in TLS-DH(E)"
@@ -119,12 +121,6 @@ informative:
       - ins: J. Somorovsky
     seriesinfo: Proceedings of the 22nd ACM SIGSAC Conference on Computer and Communications Security
     date: 2015
-  SC-tls-des-idea-ciphers-to-historic:
-    title: "Moving single-DES and IDEA TLS ciphersuites to Historic"
-    target: https://datatracker.ietf.org/doc/status-change-tls-des-idea-ciphers-to-historic/
-    author:
-      -ins: Benjamin Kaduk
-    date: 2021-01-25
   DLOG795:
     title: "Comparing the difficulty of factorization and discrete logarithm: a 240-digit experiment"
     target: https://eprint.iacr.org/2020/697
@@ -136,12 +132,6 @@ informative:
       - ins: E. Thomé
       - ins: P. Zimmermann
     date: 2020-08-17
-  server_side_tls:
-    title: "Server Side TLS"
-    target: https://wiki.mozilla.org/Security/Server_Side_TLS
-    author:
-      - ins: A. King
-    date: 2020-07
   MAY4:
     title: "May the fourth be with you: A microarchitectural side channel attack on several real-world applications of curve25519"
     target: https://dl.acm.org/doi/pdf/10.1145/3133956.3134029
@@ -245,7 +235,7 @@ Bleichenbacher's attack would affect all endpoints sharing the same RSA key (see
 
 Given these problems, this document updates {{!RFC9325}}, {{!RFC4346}}, {{!RFC5246}},
 {{!RFC4162}}, {{!RFC6347}}, {{!RFC5932}}, {{!RFC5288}}, {{!RFC6209}}, {{!RFC6367}},
-{{!RFC8422}}, {{!RFC5289}}, and {{!RFC5469}} to remediate the above problems.
+{{!RFC8422}}, {{!RFC5289}}, {{!RFC4785}}, {{!RFC4279}}, {{!RFC5487}}, {{!RFC6655}}, {{!RFC7509}} and {{!RFC5469}} to remediate the above problems.
 
 ## Requirements
 
@@ -263,7 +253,7 @@ Note that TLS 1.0 and 1.1 are deprecated by {{!RFC8996}} and
 TLS 1.3 does not support ECDH {{!I-D.ietf-tls-rfc8446bis}}.) This includes all cipher suites listed
 in the table in {{appendix-ecdh}}.
 
-In addition, to avoid the use of non-ephemeral Diffie Hellman, clients SHOULD NOT use use and server SHOULD NOT accept certificates with fixed DH parameters. These certificate types are rsa_fixed_dh, dss_fixed_dh, rsa_fixed_ecdh and ecdsa_fixed_ecdh. These values only apply to TLS versions of 1.2 and below.
+In addition, to avoid the use of non-ephemeral Diffie Hellman, clients SHOULD NOT use use and server SHOULD NOT accept certificates with fixed DH parameters. These certificate types are rsa_fixed_dh, dss_fixed_dh, rsa_fixed_ecdh and ecdsa_fixed_ecdh as listed in {{appendix-cert}}. These values only apply to TLS versions of 1.2 and below.
 
 # Ephemeral Finite Field Diffie Hellman {#dhe}
 
@@ -281,14 +271,7 @@ already marked as not recommended in the "TLS Cipher Suites" registry.
 
 # IANA Considerations
 
-This document requests IANA to mark the cipher suites listed in {{appendix-dh}}, {{appendix-ecdh}}, {{appendix-dhe}} and in {{appendix-rsa}} as "D" in the "Recommended" column, see {{I-D.ietf-tls-rfc8447bis}}, in the "TLS Cipher Suites" registry.
-
-This document also requests IANA to populate a "D" in the recommended column of the TLS ClientCertificateType Identifiers for the following certificate types:
-
-- rsa_fixed_dh (3)
-- dss_fixed_dh (4)
-- rsa_fixed_ecdh (65)
-- ecdsa_fixed_ecdh (66)
+This document requests IANA to mark the cipher suites from the "TLS Cipher Suites" registry listed in {{appendix-dh}}, {{appendix-ecdh}}, {{appendix-dhe}}, {{appendix-rsa}}, and the certificate types from the "TLS ClientCertificateType Identifiers" registed listed in {{appendix-cert}} as "D" in the "Recommended" column, see {{!I-D.ietf-tls-rfc8447bis}}.
 
 # Security Considerations {#sec-considerations}
 
@@ -453,10 +436,10 @@ comments and suggestions.
 | Ciphersuite  | Reference |
 |:-|:-|
 | TLS_DHE_DSS_EXPORT_WITH_DES40_CBC_SHA | {{!RFC4346}} |
-| TLS_DHE_DSS_WITH_DES_CBC_SHA | {{!RFC5469}}{{SC-tls-des-idea-ciphers-to-historic}} |
+| TLS_DHE_DSS_WITH_DES_CBC_SHA | {{!RFC5469}} {{!RFC8996}} |
 | TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA | {{!RFC5246}} |
 | TLS_DHE_RSA_EXPORT_WITH_DES40_CBC_SHA | {{!RFC4346}} |
-| TLS_DHE_RSA_WITH_DES_CBC_SHA | {{!RFC5469}}{{SC-tls-des-idea-ciphers-to-historic}} |
+| TLS_DHE_RSA_WITH_DES_CBC_SHA | {{!RFC5469}} {{!RFC8996}} |
 | TLS_DHE_RSA_WITH_3DES_EDE_CBC_SHA | {{!RFC5246}} |
 | TLS_DHE_PSK_WITH_NULL_SHA | {{!RFC4785}} |
 | TLS_DHE_DSS_WITH_AES_128_CBC_SHA | {{!RFC5246}} |
@@ -532,9 +515,9 @@ comments and suggestions.
 | TLS_RSA_WITH_RC4_128_MD5 | {{!RFC5246}}{{!RFC6347}} |
 | TLS_RSA_WITH_RC4_128_SHA | {{!RFC5246}}{{!RFC6347}} |
 | TLS_RSA_EXPORT_WITH_RC2_CBC_40_MD5 | {{!RFC4346}} |
-| TLS_RSA_WITH_IDEA_CBC_SHA | {{!RFC5469}}{{SC-tls-des-idea-ciphers-to-historic}} |
+| TLS_RSA_WITH_IDEA_CBC_SHA | {{!RFC5469}} {{!RFC8996}} |
 | TLS_RSA_EXPORT_WITH_DES40_CBC_SHA | {{!RFC4346}} |
-| TLS_RSA_WITH_DES_CBC_SHA | {{!RFC5469}}{{SC-tls-des-idea-ciphers-to-historic}} |
+| TLS_RSA_WITH_DES_CBC_SHA | {{!RFC5469}} {{!RFC8996}} |
 | TLS_RSA_WITH_3DES_EDE_CBC_SHA | {{!RFC5246}} |
 | TLS_RSA_PSK_WITH_NULL_SHA | {{!RFC4785}} |
 | TLS_RSA_WITH_AES_128_CBC_SHA | {{!RFC5246}} |
@@ -578,3 +561,12 @@ comments and suggestions.
 | TLS_RSA_WITH_AES_128_CCM_8 | {{!RFC6655}} |
 | TLS_RSA_WITH_AES_256_CCM_8 | {{!RFC6655}} |
 | TLS_RSA_PSK_WITH_CHACHA20_POLY1305_SHA256 | {{!RFC7905}} |
+
+# TLS ClientCertificateType Identifiers Deprecated by This Document {#appendix-cert}
+
+| Certificate Type  | Reference |
+|:-|:-|
+| rsa_fixed_dh (3) | {{!RFC5246}} |
+| dss_fixed_dh (4) | {{!RFC5246}} |
+| rsa_fixed_ecdh (65) | {{!RFC8422}} |
+| ecdsa_fixed_ecdh (66) | {{!RFC8422}} |
