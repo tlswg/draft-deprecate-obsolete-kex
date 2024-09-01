@@ -235,7 +235,7 @@ the domain separation of keys. Therefore, a single endpoint that is vulnerable t
 Bleichenbacher's attack would affect all endpoints sharing the same RSA key (see
 {{XPROT}}, {{DROWN}}).
 
-Given these problems, this document updates {{!RFC9325}}, {{!RFC4346}}, {{!RFC5246}},
+This document updates {{!RFC9325}}, {{!RFC4346}}, {{!RFC5246}},
 {{!RFC4162}}, {{!RFC6347}}, {{!RFC5932}}, {{!RFC5288}}, {{!RFC6209}}, {{!RFC6367}},
 {{!RFC8422}}, {{!RFC5289}}, {{!RFC4785}}, {{!RFC4279}}, {{!RFC5487}}, {{!RFC6655}}, {{!RFC7905}} and {{!RFC5469}} to remediate the above problems.
 
