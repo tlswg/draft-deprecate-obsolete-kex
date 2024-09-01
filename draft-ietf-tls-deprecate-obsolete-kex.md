@@ -4,7 +4,7 @@ abbrev: Deprecating RSA and FFDH(E)
 docname: draft-ietf-tls-deprecate-obsolete-kex-latest
 submissionType: IETF
 category: std
-updates: 9325, 4346, 5246, 4162, 6347, 5932, 5288, 6209, 6367, 8422, 5289, 5469, 4785, 4279, 5487, 6655, 7509
+updates: 9325, 4346, 5246, 4162, 6347, 5932, 5288, 6209, 6367, 8422, 5289, 5469, 4785, 4279, 5487, 6655, 7905
 date:
 number:
 area: security
@@ -162,8 +162,10 @@ author:
 This document deprecates the use of RSA key exchange and Diffie Hellman over a finite field in TLS 1.2, and discourages the use of static elliptic curve Diffie Hellman cipher suites.
 
 Note that these prescriptions apply only to TLS 1.2 since TLS 1.0 and 1.1 are
-deprecated by {{!RFC8996}} and TLS 1.3 either does not use the affected
+deprecated by RFC 8996 and TLS 1.3 either does not use the affected
 algorithm or does not share the relevant configuration options.
+
+This document updates RFCs 9325, 4346, 5246, 4162, 6347, 5932, 5288, 6209, 6367, 8422, 5289, 5469, 4785, 4279, 5487, 6655, and 7905
 
 --- middle
 
@@ -235,7 +237,7 @@ Bleichenbacher's attack would affect all endpoints sharing the same RSA key (see
 
 Given these problems, this document updates {{!RFC9325}}, {{!RFC4346}}, {{!RFC5246}},
 {{!RFC4162}}, {{!RFC6347}}, {{!RFC5932}}, {{!RFC5288}}, {{!RFC6209}}, {{!RFC6367}},
-{{!RFC8422}}, {{!RFC5289}}, {{!RFC4785}}, {{!RFC4279}}, {{!RFC5487}}, {{!RFC6655}}, {{!RFC7509}} and {{!RFC5469}} to remediate the above problems.
+{{!RFC8422}}, {{!RFC5289}}, {{!RFC4785}}, {{!RFC4279}}, {{!RFC5487}}, {{!RFC6655}}, {{!RFC7905}} and {{!RFC5469}} to remediate the above problems.
 
 ## Requirements
 
