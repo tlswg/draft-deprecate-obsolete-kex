@@ -165,7 +165,7 @@ Note that these prescriptions apply only to TLS 1.2 since TLS 1.0 and 1.1 are
 deprecated by RFC 8996 and TLS 1.3 either does not use the affected
 algorithm or does not share the relevant configuration options.
 
-This document updates RFCs 9325, 4346, 5246, 4162, 6347, 5932, 5288, 6209, 6367, 8422, 5289, 5469, 4785, 4279, 5487, 6655, and 7905
+This document updates RFCs 9325, 4346, 5246, 4162, 6347, 5932, 5288, 6209, 6367, 8422, 5289, 5469, 4785, 4279, 5487, 6655, and 7905.
 
 --- middle
 
