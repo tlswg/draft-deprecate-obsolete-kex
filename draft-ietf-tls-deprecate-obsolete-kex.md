@@ -179,7 +179,7 @@ non-ephemeral varieties. Non-ephemeral DH algorithms use static DH public keys
 included in the authenticating peer's certificate; see {{?RFC4492}} for discussion.
 In contrast, ephemeral DH algorithms use ephemeral DH public keys sent in the
 handshake and authenticated by the peer's certificate. Ephemeral and
-non-ephemeral finite field DH algorithms are called DHE and DH  (or FFDHE and FFDH),
+non-ephemeral finite field DH algorithms are called DHE and DH (or FFDHE and FFDH),
 respectively, and ephemeral and non-ephemeral elliptic curve DH algorithms are called
 ECDHE and ECDH, respectively {{?RFC4492}}.
 
@@ -255,7 +255,7 @@ Note that TLS 1.0 and 1.1 are deprecated by {{!RFC8996}} and
 TLS 1.3 does not support ECDH {{!I-D.ietf-tls-rfc8446bis}}.) This includes all cipher suites listed
 in the table in {{appendix-ecdh}}.
 
-In addition, to avoid the use of non-ephemeral Diffie Hellman, clients SHOULD NOT use use and server SHOULD NOT accept certificates with fixed DH parameters. These certificate types are rsa_fixed_dh, dss_fixed_dh, rsa_fixed_ecdh and ecdsa_fixed_ecdh as listed in {{appendix-cert}}. These values only apply to TLS versions of 1.2 and below.
+In addition, to avoid the use of non-ephemeral Diffie Hellman, clients SHOULD NOT use and servers SHOULD NOT accept certificates with fixed DH parameters. These certificate types are rsa_fixed_dh, dss_fixed_dh, rsa_fixed_ecdh and ecdsa_fixed_ecdh as listed in {{appendix-cert}}. These values only apply to TLS versions of 1.2 and below.
 
 # Ephemeral Finite Field Diffie Hellman {#dhe}
 
@@ -273,7 +273,7 @@ already marked as not recommended in the "TLS Cipher Suites" registry.
 
 # IANA Considerations
 
-This document requests IANA to mark the cipher suites from the "TLS Cipher Suites" registry listed in {{appendix-dh}}, {{appendix-ecdh}}, {{appendix-dhe}}, {{appendix-rsa}}, and the certificate types from the "TLS ClientCertificateType Identifiers" registed listed in {{appendix-cert}} as "D" in the "Recommended" column, see {{!I-D.ietf-tls-rfc8447bis}}.
+This document requests IANA to mark the cipher suites from the "TLS Cipher Suites" registry listed in {{appendix-dh}}, {{appendix-ecdh}}, {{appendix-dhe}}, {{appendix-rsa}}, and the certificate types from the "TLS ClientCertificateType Identifiers" registry listed in {{appendix-cert}} as "D" in the "Recommended" column, see {{!I-D.ietf-tls-rfc8447bis}}.
 
 # Security Considerations {#sec-considerations}
 
@@ -283,7 +283,7 @@ already considered bad practice since they do not provide forward secrecy. Howev
 Raccoon revealed that timing side channels in processing TLS premaster secrets may be
 exploited to reveal the encrypted premaster secret.
 
-As for non-ephemeral elliptic curve DH cipher suites, forgoing forward secrecy
+As for non-ephemeral elliptic curve DH cipher suites (TLS_ECDH_\*), forgoing forward secrecy
 not only allows retroactive decryption in the event of key compromise but may
 also enable a broad category of attacks where the attacker exploits key reuse
 to repeatedly query a cryptographic secret.
@@ -310,7 +310,7 @@ key reuse not only prevents decryption in the event of key compromise, but also
 precludes this category of attacks altogether. Therefore, this document
 discourages the reuse of elliptic curve DH public keys.
 
-As for ephemeral finite field Diffie-Hellman in TLS 1.2, as explained above, clients have no practical way to support these cipher suites while ensuring they only negotiate security parameters that are acceptable to them. In TLS 1.2, the server chooses the Diffie-Hellman group, and custom groups are prevalent. Therefore, once the client includes these cipher suites in its handshake and the server presents a custom group, the client cannot complete the handshake while ensuring security. Verifying the group structure is prohibitively expensive for the client. Using a safelist of known-good groups is also impractical, since server operators were encouraged to generate their own custom group. Further, there is no mechanism for the handshake to fall back to other parameters, that are acceptable to both the client and server.
+As for ephemeral finite field Diffie-Hellman in TLS 1.2 (TLS_DHE_\* and TLS_PSK_DHE_\*), as explained above, clients have no practical way to support these cipher suites while ensuring they only negotiate security parameters that are acceptable to them. In TLS 1.2, the server chooses the Diffie-Hellman group, and custom groups are prevalent. Therefore, once the client includes these cipher suites in its handshake and the server presents a custom group, the client cannot complete the handshake while ensuring security. Verifying the group structure is prohibitively expensive for the client. Using a safelist of known-good groups is also impractical, since server operators were encouraged to generate their own custom group. Further, there is no mechanism for the handshake to fall back to other parameters, that are acceptable to both the client and server.
 
 # Acknowledgments
 
