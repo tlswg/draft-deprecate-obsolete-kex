@@ -239,6 +239,10 @@ This document updates {{!RFC9325}}, {{!RFC4346}}, {{!RFC5246}},
 {{!RFC4162}}, {{!RFC6347}}, {{!RFC5932}}, {{!RFC5288}}, {{!RFC6209}}, {{!RFC6367}},
 {{!RFC8422}}, {{!RFC5289}}, {{!RFC4785}}, {{!RFC4279}}, {{!RFC5487}}, {{!RFC6655}}, {{!RFC7905}} and {{!RFC5469}} to remediate the above problems.
 
+{{RFC9325}} contains the latest IETF recommendations for users of the TLS protocol (and specifically, TLS 1.2) and this
+document supersedes it in several points. {{update-9325}} details the exact differences.
+All other recommendations of the BCP document remain valid.
+
 ## Requirements
 
 {::boilerplate bcp14}
@@ -572,3 +576,21 @@ comments and suggestions.
 | dss_fixed_dh (4) | {{!RFC5246}} |
 | rsa_fixed_ecdh (65) | {{!RFC8422}} |
 | ecdsa_fixed_ecdh (66) | {{!RFC8422}} |
+
+# Updating RFC 9325 {#update-9325}
+
+This document updates {{RFC9325}} with respect to the use of TLS 1.2, and
+the table below lists the exact changes. For RFC 9325,
+Sec. 4.1 is the source of all details listed.
+
+<cref>Note to RFC Editor: please replace XXX below by the current RFC number.</cref>
+
+|---------+---------+---------|
+| | RFC 9325 | RFC XXX |
+|---------|:--------|--------:|
+| Non-ephemeral FFDH | SHOULD NOT | MUST NOT |
+| Non-ephemeral ECDH | SHOULD NOT | No change |
+| Fixed DH certificate types | Unspecified | SHOULD NOT |
+| Ephemeral FFDH | SHOULD NOT | MUST NOT |
+| Static RSA | SHOULD NOT | MUST NOT |
+|---------+---------+---------|
