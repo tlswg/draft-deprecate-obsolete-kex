@@ -260,7 +260,7 @@ TLS 1.3 does not support ECDH {{!I-D.ietf-tls-rfc8446bis}}.) This includes all c
 in the table in {{appendix-ecdh}}.
 
 In addition, to avoid the use of non-ephemeral Diffie-Hellman, clients SHOULD NOT use and servers SHOULD NOT accept certificates with fixed DH parameters. These certificate types are rsa_fixed_dh, dss_fixed_dh, rsa_fixed_ecdh and ecdsa_fixed_ecdh as listed in {{appendix-cert}}. These values only apply to TLS versions of 1.2 and below. (Note that TLS 1.0 and 1.1 are deprecated by {{!RFC8996}} and
-TLS 1.3 does not support ECDH {{!I-D.ietf-tls-rfc8446bis}}.)
+(D)TLS 1.3 does not support ECDH {{!I-D.ietf-tls-rfc8446bis}}{{!RFC9147}}.)
 
 # Ephemeral Finite Field Diffie-Hellman {#dhe}
 
