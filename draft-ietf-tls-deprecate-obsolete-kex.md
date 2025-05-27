@@ -159,7 +159,9 @@ author:
 
 --- abstract
 
-This document deprecates the use of RSA key exchange and Diffie Hellman over a finite field in (D)TLS 1.2, and discourages the use of static elliptic curve Diffie Hellman cipher suites.
+For (D)TLS 1.3, this document the use of two key exchanges, namely Diffie-Hellman over
+a finite field and RSA, and it discourages the use of static elliptic curve Diffie-Hellman
+cipher suites.
 
 These prescriptions apply only to (D)TLS 1.2 since (D)TLS 1.0 and TLS 1.1 are
 deprecated by RFC 8996 and (D)TLS 1.3 either does not use the affected
