@@ -1,5 +1,5 @@
 ---
-title: Deprecating Obsolete Key Exchange Methods in TLS 1.2
+title: Deprecating Obsolete Key Exchange Methods in (D)TLS 1.2
 abbrev: Deprecating RSA and FFDH(E)
 docname: draft-ietf-tls-deprecate-obsolete-kex-latest
 submissionType: IETF
@@ -159,10 +159,10 @@ author:
 
 --- abstract
 
-This document deprecates the use of RSA key exchange and Diffie Hellman over a finite field in TLS 1.2, and discourages the use of static elliptic curve Diffie Hellman cipher suites.
+This document deprecates the use of RSA key exchange and Diffie Hellman over a finite field in (D)TLS 1.2, and discourages the use of static elliptic curve Diffie Hellman cipher suites.
 
-Note that these prescriptions apply only to TLS 1.2 since TLS 1.0 and 1.1 are
-deprecated by RFC 8996 and TLS 1.3 either does not use the affected
+Note that these prescriptions apply only to (D)TLS 1.2 since (D)TLS 1.0 and TLS 1.1 are
+deprecated by RFC 8996 and (D)TLS 1.3 either does not use the affected
 algorithm or does not share the relevant configuration options.
 
 This document updates RFCs 9325, 4346, 5246, 4162, 6347, 5932, 5288, 6209, 6367, 8422, 5289, 5469, 4785, 4279, 5487, 6655, and 7905.
@@ -171,7 +171,7 @@ This document updates RFCs 9325, 4346, 5246, 4162, 6347, 5932, 5288, 6209, 6367,
 
 # Introduction {#introduction}
 
-TLS 1.2 supports a variety of key exchange algorithms, including RSA, Diffie Hellman
+(D)TLS 1.2 supports a variety of key exchange algorithms, including RSA, Diffie Hellman
 over a finite field, and elliptic curve Diffie Hellman (ECDH).
 
 Diffie Hellman key exchange, over any group, comes in ephemeral and
@@ -197,7 +197,7 @@ Additionally, RSA key exchange suffers from security problems that are independe
 of implementation choices as well as problems that stem purely from the difficulty
 of implementing security countermeasures correctly.
 
-At a rough glance, the problems affecting FFDHE in TLS 1.2 are as follows:
+At a rough glance, the problems affecting FFDHE in (D)TLS 1.2 are as follows:
 
 1. FFDHE suffers from interoperability problems because there is no mechanism for
 negotiating the group, and some implementations only support small group sizes
@@ -221,7 +221,7 @@ an attacker to cheaply decrypt a relatively large fraction of FFDHE traffic
 channel attack. (Note that FFDH is inherently vulnerable to the Raccoon attack
 unless constant-time mitigations are employed.)
 
-The problems affecting RSA key exchange in TLS 1.2 are as follows:
+The problems affecting RSA key exchange in (D)TLS 1.2 are as follows:
 
 1. RSA key exchange offers no forward secrecy, by construction.
 
@@ -230,7 +230,7 @@ Experience shows that variants of this attack arise every few years because
 implementing the relevant countermeasure correctly is difficult (see
 {{ROBOT}}, {{NEW-BLEI}}, {{DROWN}}).
 
-3. In addition to the above point, there is no convenient mechanism in TLS 1.2 for
+3. In addition to the above point, there is no convenient mechanism in (D)TLS 1.2 for
 the domain separation of keys. Therefore, a single endpoint that is vulnerable to
 Bleichenbacher's attack would affect all endpoints sharing the same RSA key (see
 {{XPROT}}, {{DROWN}}).
@@ -239,7 +239,7 @@ This document updates {{!RFC9325}}, {{!RFC4346}}, {{!RFC5246}},
 {{!RFC4162}}, {{!RFC6347}}, {{!RFC5932}}, {{!RFC5288}}, {{!RFC6209}}, {{!RFC6367}},
 {{!RFC8422}}, {{!RFC5289}}, {{!RFC4785}}, {{!RFC4279}}, {{!RFC5487}}, {{!RFC6655}}, {{!RFC7905}} and {{!RFC5469}} to remediate the above problems.
 
-{{RFC9325}} contains the latest IETF recommendations for users of the TLS protocol (and specifically, TLS 1.2) and this
+{{RFC9325}} contains the latest IETF recommendations for users of the (D)TLS protocol (and specifically, (D)TLS 1.2) and this
 document supersedes it in several points. {{update-9325}} details the exact differences.
 All other recommendations of the BCP document remain valid.
 
@@ -249,29 +249,29 @@ All other recommendations of the BCP document remain valid.
 
 # Non-Ephemeral Diffie Hellman {#non-ephemeral}
 
-Clients MUST NOT offer and servers MUST NOT select non-ephemeral FFDH cipher suites in TLS 1.2 connections.
-(Note that TLS 1.0 and 1.1 are deprecated by {{!RFC8996}} and TLS 1.3 does not
-support FFDH {{!I-D.ietf-tls-rfc8446bis}}.) This includes all cipher suites listed in the table in
+Clients MUST NOT offer and servers MUST NOT select non-ephemeral FFDH cipher suites in (D)TLS 1.2 connections.
+(Note that (D)TLS 1.0 and TLS 1.1 are deprecated by {{!RFC8996}} and (D)TLS 1.3 does not
+support FFDH {{!I-D.ietf-tls-rfc8446bis}}{{!RFC9147}}.) This includes all cipher suites listed in the table in
 {{appendix-dh}}.
 
-Clients SHOULD NOT offer and servers SHOULD NOT select non-ephemeral ECDH cipher suites in TLS 1.2 connections. (This requirement is already present in {{!RFC9325}}.
-Note that TLS 1.0 and 1.1 are deprecated by {{!RFC8996}} and
-TLS 1.3 does not support ECDH {{!I-D.ietf-tls-rfc8446bis}}.) This includes all cipher suites listed
+Clients SHOULD NOT offer and servers SHOULD NOT select non-ephemeral ECDH cipher suites in (D)TLS 1.2 connections. (This requirement is already present in {{!RFC9325}}.
+Note that (D)TLS 1.0 and TLS 1.1 are deprecated by {{!RFC8996}} and
+(D)TLS 1.3 does not support ECDH {{!I-D.ietf-tls-rfc8446bis}}{{!RFC9147}}.) This includes all cipher suites listed
 in the table in {{appendix-ecdh}}.
 
-In addition, to avoid the use of non-ephemeral Diffie Hellman, clients SHOULD NOT use and servers SHOULD NOT accept certificates with fixed DH parameters. These certificate types are rsa_fixed_dh, dss_fixed_dh, rsa_fixed_ecdh and ecdsa_fixed_ecdh as listed in {{appendix-cert}}. These values only apply to TLS versions of 1.2 and below.
+In addition, to avoid the use of non-ephemeral Diffie Hellman, clients SHOULD NOT use and servers SHOULD NOT accept certificates with fixed DH parameters. These certificate types are rsa_fixed_dh, dss_fixed_dh, rsa_fixed_ecdh and ecdsa_fixed_ecdh as listed in {{appendix-cert}}. These values only apply to (D)TLS versions of 1.2 and below.
 
 # Ephemeral Finite Field Diffie Hellman {#dhe}
 
-Clients MUST NOT offer and servers MUST NOT select FFDHE cipher suites in TLS 1.2 connections.
+Clients MUST NOT offer and servers MUST NOT select FFDHE cipher suites in (D)TLS 1.2 connections.
 This includes all cipher suites listed in the table in {{appendix-dhe}}.
-(Note that TLS 1.0 and 1.1 are deprecated by {{!RFC8996}}.) FFDHE cipher suites in TLS 1.3 do not suffer from the problems presented in {{introduction}}; see {{!I-D.ietf-tls-rfc8446bis}}. Therefore, clients and servers MAY offer FFDHE cipher suites in TLS 1.3 connections.
+(Note that (D)TLS 1.0 and TLS 1.1 are deprecated by {{!RFC8996}}.) FFDHE cipher suites in (D)TLS 1.3 do not suffer from the problems presented in {{introduction}}; see {{!I-D.ietf-tls-rfc8446bis}} and {{!RFC9147}}. Therefore, clients and servers MAY offer FFDHE cipher suites in (D)TLS 1.3 connections.
 
 # RSA {#rsa}
 
-Clients MUST NOT offer and servers MUST NOT select RSA cipher suites in TLS 1.2
-connections. (Note that TLS 1.0 and 1.1 are deprecated by {{!RFC8996}}, and TLS
-1.3 does not support static RSA {{!I-D.ietf-tls-rfc8446bis}}.) This includes all cipher suites
+Clients MUST NOT offer and servers MUST NOT select RSA cipher suites in (D)TLS 1.2
+connections. (Note that (D)TLS 1.0 and TLS 1.1 are deprecated by {{!RFC8996}}, and (D)TLS
+1.3 does not support static RSA {{!I-D.ietf-tls-rfc8446bis}}{{!RFC9147}}.) This includes all cipher suites
 listed in the table in {{appendix-rsa}}. Note that these cipher suites are
 already marked as not recommended in the "TLS Cipher Suites" registry.
 
@@ -314,7 +314,7 @@ key reuse not only prevents decryption in the event of key compromise, but also
 precludes this category of attacks altogether. Therefore, this document
 discourages the reuse of elliptic curve DH public keys.
 
-As for ephemeral finite field Diffie-Hellman in TLS 1.2 (TLS_DHE_\* and TLS_PSK_DHE_\*), as explained above, clients have no practical way to support these cipher suites while ensuring they only negotiate security parameters that are acceptable to them. In TLS 1.2, the server chooses the Diffie-Hellman group, and custom groups are prevalent. Therefore, once the client includes these cipher suites in its handshake and the server presents a custom group, the client cannot complete the handshake while ensuring security. Verifying the group structure is prohibitively expensive for the client. Using a safelist of known-good groups is also impractical, since server operators were encouraged to generate their own custom group. Further, there is no mechanism for the handshake to fall back to other parameters, that are acceptable to both the client and server.
+As for ephemeral finite field Diffie-Hellman in (D)TLS 1.2 (TLS_DHE_\* and TLS_PSK_DHE_\*), as explained above, clients have no practical way to support these cipher suites while ensuring they only negotiate security parameters that are acceptable to them. In (D)TLS 1.2, the server chooses the Diffie-Hellman group, and custom groups are prevalent. Therefore, once the client includes these cipher suites in its handshake and the server presents a custom group, the client cannot complete the handshake while ensuring security. Verifying the group structure is prohibitively expensive for the client. Using a safelist of known-good groups is also impractical, since server operators were encouraged to generate their own custom group. Further, there is no mechanism for the handshake to fall back to other parameters, that are acceptable to both the client and server.
 
 # Acknowledgments
 
@@ -579,7 +579,7 @@ comments and suggestions.
 
 # Updating RFC 9325 {#update-9325}
 
-This document updates {{RFC9325}} with respect to the use of TLS 1.2, and
+This document updates {{RFC9325}} with respect to the use of (D)TLS 1.2, and
 the table below lists the exact changes. For RFC 9325,
 Sec. 4.1 is the source of all details listed.
 
