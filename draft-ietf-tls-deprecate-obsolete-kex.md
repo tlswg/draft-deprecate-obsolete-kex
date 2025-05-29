@@ -279,7 +279,8 @@ already marked as not recommended in the "TLS Cipher Suites" registry.
 
 This document requests IANA to mark the cipher suites from the "TLS Cipher Suites" registry listed in {{appendix-dh}}, {{appendix-ecdh}}, {{appendix-dhe}}, {{appendix-rsa}}, and the certificate types from the "TLS ClientCertificateType Identifiers" registry listed in {{appendix-cert}} as "D" in the "Recommended" column, see {{!I-D.ietf-tls-rfc8447bis}}.
 
-For each regsitry entry in {{appendix-dh}}, {{appendix-ecdh}}, {{appendix-dhe}}, {{appendix-rsa}}, and {{appendix-cert}}, IANA is also requested to update registry entry's Reference column to refer to the this document.
+For each regsitry entry in {{appendix-dh}}, {{appendix-ecdh}}, {{appendix-dhe}}, {{appendix-rsa}}, and {{appendix-cert}},
+IANA is also requested to update the registry entry's Reference column to refer to the this document.
 
 # Security Considerations {#sec-considerations}
 
