@@ -159,7 +159,7 @@ author:
 
 --- abstract
 
-This document deprecates the use of RSA key exchange and Diffie Hellman over a finite field in TLS 1.2, and discourages the use of static elliptic curve Diffie Hellman cipher suites.
+This document deprecates the use of RSA key exchange and Diffie-Hellman over a finite field in TLS 1.2, and discourages the use of static elliptic curve Diffie-Hellman cipher suites.
 
 Note that these prescriptions apply only to TLS 1.2 since TLS 1.0 and 1.1 are
 deprecated by RFC 8996 and TLS 1.3 either does not use the affected
@@ -171,10 +171,10 @@ This document updates RFCs 9325, 4346, 5246, 4162, 6347, 5932, 5288, 6209, 6367,
 
 # Introduction {#introduction}
 
-TLS 1.2 supports a variety of key exchange algorithms, including RSA, Diffie Hellman
-over a finite field, and elliptic curve Diffie Hellman (ECDH).
+TLS 1.2 supports a variety of key exchange algorithms, including RSA, Diffie-Hellman
+over a finite field, and elliptic curve Diffie-Hellman (ECDH).
 
-Diffie Hellman key exchange, over any group, comes in ephemeral and
+Diffie-Hellman key exchange, over any group, comes in ephemeral and
 non-ephemeral varieties. Non-ephemeral DH algorithms use static DH public keys
 included in the authenticating peer's certificate; see {{?RFC4492}} for discussion.
 In contrast, ephemeral DH algorithms use ephemeral DH public keys sent in the
@@ -247,7 +247,7 @@ All other recommendations of the BCP document remain valid.
 
 {::boilerplate bcp14}
 
-# Non-Ephemeral Diffie Hellman {#non-ephemeral}
+# Non-Ephemeral Diffie-Hellman {#non-ephemeral}
 
 Clients MUST NOT offer and servers MUST NOT select non-ephemeral FFDH cipher suites in TLS 1.2 connections.
 (Note that TLS 1.0 and 1.1 are deprecated by {{!RFC8996}} and TLS 1.3 does not
@@ -255,13 +255,14 @@ support FFDH {{!I-D.ietf-tls-rfc8446bis}}.) This includes all cipher suites list
 {{appendix-dh}}.
 
 Clients SHOULD NOT offer and servers SHOULD NOT select non-ephemeral ECDH cipher suites in TLS 1.2 connections. (This requirement is already present in {{!RFC9325}}.
-Note that TLS 1.0 and 1.1 are deprecated by {{!RFC8996}} and
+(Note that TLS 1.0 and 1.1 are deprecated by {{!RFC8996}} and
 TLS 1.3 does not support ECDH {{!I-D.ietf-tls-rfc8446bis}}.) This includes all cipher suites listed
 in the table in {{appendix-ecdh}}.
 
-In addition, to avoid the use of non-ephemeral Diffie Hellman, clients SHOULD NOT use and servers SHOULD NOT accept certificates with fixed DH parameters. These certificate types are rsa_fixed_dh, dss_fixed_dh, rsa_fixed_ecdh and ecdsa_fixed_ecdh as listed in {{appendix-cert}}. These values only apply to TLS versions of 1.2 and below.
+In addition, to avoid the use of non-ephemeral Diffie-Hellman, clients SHOULD NOT use and servers SHOULD NOT accept certificates with fixed DH parameters. These certificate types are rsa_fixed_dh, dss_fixed_dh, rsa_fixed_ecdh and ecdsa_fixed_ecdh as listed in {{appendix-cert}}. These values only apply to TLS versions of 1.2 and below. (Note that TLS 1.0 and 1.1 are deprecated by {{!RFC8996}} and
+(D)TLS 1.3 does not support ECDH {{!I-D.ietf-tls-rfc8446bis}}{{!RFC9147}}.)
 
-# Ephemeral Finite Field Diffie Hellman {#dhe}
+# Ephemeral Finite Field Diffie-Hellman {#dhe}
 
 Clients MUST NOT offer and servers MUST NOT select FFDHE cipher suites in TLS 1.2 connections.
 This includes all cipher suites listed in the table in {{appendix-dhe}}.
