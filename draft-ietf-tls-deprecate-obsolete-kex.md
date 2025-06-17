@@ -173,8 +173,8 @@ This document updates RFCs 9325, 4346, 5246, 4162, 6347, 5932, 5288, 6209, 6367,
 
 # Introduction {#introduction}
 
-(D)TLS 1.2 supports a variety of key exchange algorithms, including RSA, Diffie Hellman
-over a finite field, and elliptic curve Diffie Hellman (ECDH).
+(D)TLS 1.2 supports a variety of key exchange algorithms, including RSA, Diffie-Hellman
+over a finite field, and elliptic curve Diffie-Hellman (ECDH).
 
 Diffie-Hellman key exchange, over any group, comes in ephemeral and
 non-ephemeral varieties. Non-ephemeral DH algorithms use static DH public keys
@@ -261,7 +261,7 @@ Note that (D)TLS 1.0 and TLS 1.1 are deprecated by {{!RFC8996}} and
 (D)TLS 1.3 does not support ECDH {{!I-D.ietf-tls-rfc8446bis}}{{!RFC9147}}.) This includes all cipher suites listed
 in the table in {{appendix-ecdh}}.
 
-In addition, to avoid the use of non-ephemeral Diffie Hellman, clients SHOULD NOT use and servers SHOULD NOT accept certificates with fixed DH parameters. These certificate types are rsa_fixed_dh, dss_fixed_dh, rsa_fixed_ecdh and ecdsa_fixed_ecdh as listed in {{appendix-cert}}. These values only apply to (D)TLS versions of 1.2 and below.
+In addition, to avoid the use of non-ephemeral Diffie-Hellman, clients SHOULD NOT use and servers SHOULD NOT accept certificates with fixed DH parameters. These certificate types are rsa_fixed_dh, dss_fixed_dh, rsa_fixed_ecdh and ecdsa_fixed_ecdh as listed in {{appendix-cert}}. These values only apply to (D)TLS versions of 1.2 and below.
 
 # Ephemeral Finite Field Diffie-Hellman {#dhe}
 
