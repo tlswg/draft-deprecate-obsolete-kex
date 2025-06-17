@@ -159,7 +159,7 @@ author:
 
 --- abstract
 
-For (D)TLS 1.3, this document the use of two key exchanges, namely Diffie-Hellman over
+For (D)TLS 1.2, this document the use of two key exchanges, namely Diffie-Hellman over
 a finite field and RSA, and it discourages the use of static elliptic curve Diffie-Hellman
 cipher suites.
 
@@ -176,7 +176,7 @@ This document updates RFCs 9325, 4346, 5246, 4162, 6347, 5932, 5288, 6209, 6367,
 (D)TLS 1.2 supports a variety of key exchange algorithms, including RSA, Diffie Hellman
 over a finite field, and elliptic curve Diffie Hellman (ECDH).
 
-Diffie Hellman key exchange, over any group, comes in ephemeral and
+Diffie-Hellman key exchange, over any group, comes in ephemeral and
 non-ephemeral varieties. Non-ephemeral DH algorithms use static DH public keys
 included in the authenticating peer's certificate; see {{?RFC4492}} for discussion.
 In contrast, ephemeral DH algorithms use ephemeral DH public keys sent in the
@@ -249,7 +249,7 @@ All other recommendations of the BCP document remain valid.
 
 {::boilerplate bcp14}
 
-# Non-Ephemeral Diffie Hellman {#non-ephemeral}
+# Non-Ephemeral Diffie-Hellman {#non-ephemeral}
 
 Clients MUST NOT offer and servers MUST NOT select non-ephemeral FFDH cipher suites in (D)TLS 1.2 connections.
 (Note that (D)TLS 1.0 and TLS 1.1 are deprecated by {{!RFC8996}} and (D)TLS 1.3 does not
@@ -263,7 +263,7 @@ in the table in {{appendix-ecdh}}.
 
 In addition, to avoid the use of non-ephemeral Diffie Hellman, clients SHOULD NOT use and servers SHOULD NOT accept certificates with fixed DH parameters. These certificate types are rsa_fixed_dh, dss_fixed_dh, rsa_fixed_ecdh and ecdsa_fixed_ecdh as listed in {{appendix-cert}}. These values only apply to (D)TLS versions of 1.2 and below.
 
-# Ephemeral Finite Field Diffie Hellman {#dhe}
+# Ephemeral Finite Field Diffie-Hellman {#dhe}
 
 Clients MUST NOT offer and servers MUST NOT select FFDHE cipher suites in (D)TLS 1.2 connections.
 This includes all cipher suites listed in the table in {{appendix-dhe}}.
@@ -280,6 +280,9 @@ already marked as not recommended in the "TLS Cipher Suites" registry.
 # IANA Considerations
 
 This document requests IANA to mark the cipher suites from the "TLS Cipher Suites" registry listed in {{appendix-dh}}, {{appendix-ecdh}}, {{appendix-dhe}}, {{appendix-rsa}}, and the certificate types from the "TLS ClientCertificateType Identifiers" registry listed in {{appendix-cert}} as "D" in the "Recommended" column, see {{!I-D.ietf-tls-rfc8447bis}}.
+
+For each regsitry entry in {{appendix-dh}}, {{appendix-ecdh}}, {{appendix-dhe}}, {{appendix-rsa}}, and {{appendix-cert}},
+IANA is also requested to update the registry entry's Reference column to refer to the this document.
 
 # Security Considerations {#sec-considerations}
 
@@ -323,7 +326,7 @@ As for ephemeral finite field Diffie-Hellman in (D)TLS 1.2 (TLS_DHE_\* and TLS_P
 This document was inspired by discussions on the TLS WG mailing list and
 a suggestion by Filippo Valsorda following the release of the {{Raccoon}} attack.
 Thanks to Christopher A. Wood for writing up the initial draft of this document.
-Thanks also to Thomas Fossati, {{{John Preuß Mattsson}}} and {{{Manuel Pégourié-Gonnard}}} for
+Thanks also to Thomas Fossati, Sean Turner, Joe Salowey, Yaron Sheffer, Christian Buchgraber, {{{John Preuß Mattsson}}} and {{{Manuel Pégourié-Gonnard}}} for
 comments and suggestions.
 
 --- back
