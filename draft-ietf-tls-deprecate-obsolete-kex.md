@@ -324,7 +324,7 @@ As for ephemeral finite field Diffie-Hellman in TLS 1.2 (TLS_DHE_\* and TLS_PSK_
 This document was inspired by discussions on the TLS WG mailing list and
 a suggestion by Filippo Valsorda following the release of the {{Raccoon}} attack.
 Thanks to Christopher A. Wood for writing up the initial draft of this document.
-Thanks also to Thomas Fossati, {{{John Preuß Mattsson}}} and {{{Manuel Pégourié-Gonnard}}} for
+Thanks also to Thomas Fossati, Sean Turner, Joe Salowey, Yaron Sheffer, Christian Buchgraber, {{{John Preuß Mattsson}}} and {{{Manuel Pégourié-Gonnard}}} for
 comments and suggestions.
 
 --- back
