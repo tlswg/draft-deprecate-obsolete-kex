@@ -154,13 +154,14 @@ author:
 
 --- abstract
 
-For (D)TLS 1.2, this document the use of two key exchanges, namely Diffie-Hellman over
+For (D)TLS 1.2, this document deprecates the use of two key exchanges, namely Diffie-Hellman over
 a finite field and RSA, and it discourages the use of static elliptic curve Diffie-Hellman
 cipher suites.
 
 These prescriptions apply only to (D)TLS 1.2 since (D)TLS 1.0 and TLS 1.1 are
 deprecated by RFC 8996 and (D)TLS 1.3 either does not use the affected
 algorithm or does not share the relevant configuration options.
+(There is no DTLS version 1.1.)
 
 This document updates RFCs 9325, 4346, 5246, 4162, 6347, 5932, 5288, 6209, 6367, 8422, 5289, 5469, 4785, 4279, 5487, 6655, and 7905.
 
