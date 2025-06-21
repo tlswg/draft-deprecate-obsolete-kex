@@ -147,11 +147,6 @@ informative:
       - ins: F. Valsorda
 author:
 -
-      ins: C. Bartle
-      name: Carrick Bartle
-      organization: Roblox
-      email: cbartle@roblox.com
--
       ins: N. Aviram
       name: Nimrod Aviram
       organization:
@@ -323,7 +318,9 @@ As for ephemeral finite field Diffie-Hellman in (D)TLS 1.2 (TLS_DHE_\* and TLS_P
 
 # Acknowledgments
 
-This document was inspired by discussions on the TLS WG mailing list and
+This document includes many important contributions from Carrie Bartle, who wrote much of the prose, and presented it several times at the IETF TLS WG.
+
+The document was inspired by discussions on the TLS WG mailing list and
 a suggestion by Filippo Valsorda following the release of the {{Raccoon}} attack.
 Thanks to Christopher A. Wood for writing up the initial draft of this document.
 Thanks also to Thomas Fossati, Sean Turner, Joe Salowey, Yaron Sheffer, Christian Buchgraber, {{{John Preuß Mattsson}}} and {{{Manuel Pégourié-Gonnard}}} for
