@@ -34,6 +34,9 @@ informative:
       - ins: T. Jager
       - ins: J. Schwenk
       - ins: J. Somorovsky
+  tls-registry:
+    title: "Transport Layer Security (TLS) Parameters"
+    target: https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml
   weak-dh:
     title: "Weak Diffie-Hellman and the Logjam Attack"
     target: https://weakdh.org/
@@ -163,7 +166,8 @@ deprecated by RFC 8996 and (D)TLS 1.3 either does not use the affected
 algorithm or does not share the relevant configuration options.
 (There is no DTLS version 1.1.)
 
-This document updates RFCs 9325, 4346, 5246, 4162, 6347, 5932, 5288, 6209, 6367, 8422, 5289, 5469, 4785, 4279, 5487, 6655, and 7905.
+This document updates RFCs 9325, 4346, 5246, 4162, 6347, 5932, 5288, 6209, 6367, 8422, 5289, 5469, 4785, 4279, 5487, 6655, and 7905,
+to deprecate or discourage - i.e., change to MUST NOT or SHOULD NOT, as listed in the appendices - the use of cipher suites using the above key exchange methods in (D)TLS 1.2 connections.
 
 --- middle
 
@@ -235,9 +239,9 @@ Bleichenbacher's attack would affect all endpoints sharing the same RSA key (see
 
 This document updates {{!RFC9325}}, {{!RFC4346}}, {{!RFC5246}},
 {{!RFC4162}}, {{!RFC6347}}, {{!RFC5932}}, {{!RFC5288}}, {{!RFC6209}}, {{!RFC6367}},
-{{!RFC8422}}, {{!RFC5289}}, {{!RFC4785}}, {{!RFC4279}}, {{!RFC5487}}, {{!RFC6655}}, {{!RFC7905}} and {{!RFC5469}} to remediate the above problems.
+{{!RFC8422}}, {{!RFC5289}}, {{!RFC4785}}, {{!RFC4279}}, {{!RFC5487}}, {{!RFC6655}}, {{!RFC7905}} and {{!RFC5469}} to remediate the above problems, by deprecating and discouraging the use of affected cipher suites, as listed in the appendices. 
 
-{{RFC9325}} contains the latest IETF recommendations for users of the (D)TLS protocol (and specifically, (D)TLS 1.2) and this
+{{BCP195}} contains the latest IETF recommendations for users of the (D)TLS protocol (and specifically, (D)TLS 1.2) and this
 document supersedes it in several points. {{update-9325}} details the exact differences.
 All other recommendations of the BCP document remain valid.
 
@@ -275,7 +279,7 @@ already marked as not recommended in the "TLS Cipher Suites" registry.
 
 # IANA Considerations
 
-This document requests IANA to mark the cipher suites from the "TLS Cipher Suites" registry listed in {{appendix-dh}}, {{appendix-ecdh}}, {{appendix-dhe}}, {{appendix-rsa}}, and the certificate types from the "TLS ClientCertificateType Identifiers" registry listed in {{appendix-cert}} as "D" in the "Recommended" column, see {{!I-D.ietf-tls-rfc8447bis}}.
+This document requests IANA to mark the cipher suites from the "TLS Cipher Suites" registry, under “Transport Layer Security (TLS) Parameters” registry group, listed in {{appendix-dh}}, {{appendix-ecdh}}, {{appendix-dhe}}, {{appendix-rsa}}, and the certificate types from the "TLS ClientCertificateType Identifiers" registry listed in {{appendix-cert}} as "D" in the "Recommended" column, see {{!I-D.ietf-tls-rfc8447bis}}.
 
 For each registry entry in {{appendix-dh}}, {{appendix-ecdh}}, {{appendix-dhe}}, {{appendix-rsa}}, and {{appendix-cert}},
 IANA is also requested to update the registry entry's Reference column to refer to this document.
@@ -330,6 +334,8 @@ comments and suggestions.
 --- back
 
 # DH Cipher Suites Deprecated by This Document {#appendix-dh}
+
+This document requests IANA to set the “recommended” column to “D” for the following entries:
 
 | Ciphersuite  | Reference |
 |:-|:-|
@@ -397,6 +403,8 @@ comments and suggestions.
 | TLS_DH_anon_WITH_CAMELLIA_256_GCM_SHA384 | {{!RFC6367}} |
 
 # ECDH Cipher Suites Whose Use Is Discouraged by This Document {#appendix-ecdh}
+
+{{RFC9325}} already specifies that implementations SHOULD NOT negotiate the following cipher suites; accordingly, they appear with “Recommended: N” in the IANA TLS Cipher Suites registry. This document updates neither the former guidance nor the registry status. Rather, it records the rationale for discouraging use of these cipher suites, and cites prior analyses and attacks that demonstrate the associated risks.
 
 | Ciphersuite  | Reference |
 |:-|:-|
@@ -583,8 +591,7 @@ comments and suggestions.
 # Updating RFC 9325 {#update-9325}
 
 This document updates {{RFC9325}} with respect to the use of (D)TLS 1.2, and
-the table below lists the exact changes. For RFC 9325,
-Sec. 4.1 is the source of all details listed.
+the table below lists the exact changes. All changes should be made in Section 4.1 of {{RFC9325}}.
 
 <cref>Note to RFC Editor: please replace XXX below by the current RFC number.</cref>
 
