@@ -275,7 +275,7 @@ Clients MUST NOT offer and servers MUST NOT select RSA cipher suites in (D)TLS 1
 connections. (Note that (D)TLS 1.0 and TLS 1.1 are deprecated by {{!RFC8996}}, and (D)TLS
 1.3 does not support static RSA {{!I-D.ietf-tls-rfc8446bis}}{{!RFC9147}}.) This includes all cipher suites
 listed in the table in {{rsacs}}. Note that these cipher suites are
-already marked as not recommended in the "TLS Cipher Suites" registry.
+already marked as not recommended in the "TLS Cipher Suites" registry {{tls-registry}}.
 
 # Updates to Cipher Suites and TLS ClientCertificateType Identifiers
 
@@ -350,7 +350,7 @@ This document requests IANA to set the “recommended” column to “D” for t
 
 ## ECDH Cipher Suites Whose Use Is Discouraged by This Document {#ecdhcs}
 
-{{RFC9325}} already specifies that implementations SHOULD NOT negotiate the following cipher suites; accordingly, they appear with “Recommended: N” in the IANA TLS Cipher Suites registry. This document updates neither the former guidance nor the registry status. Rather, it records the rationale for discouraging use of these cipher suites, and cites prior analyses and attacks that demonstrate the associated risks.
+{{RFC9325}} already specifies that implementations SHOULD NOT negotiate the following cipher suites; accordingly, they appear with “Recommended: N” in the IANA TLS Cipher Suites registry {{tls-registry}}. This document updates neither the former guidance nor the registry status. Rather, it records the rationale for discouraging use of these cipher suites, and cites prior analyses and attacks that demonstrate the associated risks.
 
 | Ciphersuite  | Reference |
 |:-|:-|
@@ -554,7 +554,7 @@ the table below lists the exact changes. All changes should be made in Section 4
 
 # IANA Considerations
 
-This document requests IANA to mark the cipher suites from the "TLS Cipher Suites" registry, under “Transport Layer Security (TLS) Parameters” registry group, listed in {{dhcs}}, {{ecdhcs}}, {{dhecs}}, {{rsacs}}, and the certificate types from the "TLS ClientCertificateType Identifiers" registry listed in {{cert}} as "D" in the "Recommended" column, see {{!I-D.ietf-tls-rfc8447bis}}.
+This document requests IANA to mark the cipher suites from the "TLS Cipher Suites" registry {{tls-registry}}, under “Transport Layer Security (TLS) Parameters” registry group, listed in {{dhcs}}, {{ecdhcs}}, {{dhecs}}, {{rsacs}}, and the certificate types from the "TLS ClientCertificateType Identifiers" registry listed in {{cert}} as "D" in the "Recommended" column, see {{!I-D.ietf-tls-rfc8447bis}}.
 
 For each registry entry in {{dhcs}}, {{ecdhcs}}, {{dhecs}}, {{rsacs}}, and {{cert}},
 IANA is also requested to update the registry entry's Reference column to refer to this document.
