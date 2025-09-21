@@ -239,9 +239,9 @@ Bleichenbacher's attack would affect all endpoints sharing the same RSA key (see
 
 This document updates {{!RFC9325}}, {{!RFC4346}}, {{!RFC5246}},
 {{!RFC4162}}, {{!RFC6347}}, {{!RFC5932}}, {{!RFC5288}}, {{!RFC6209}}, {{!RFC6367}},
-{{!RFC8422}}, {{!RFC5289}}, {{!RFC4785}}, {{!RFC4279}}, {{!RFC5487}}, {{!RFC6655}}, {{!RFC7905}} and {{!RFC5469}} to remediate the above problems, by deprecating and discouraging the use of affected cipher suites, as listed in the appendices. 
+{{!RFC8422}}, {{!RFC5289}}, {{!RFC4785}}, {{!RFC4279}}, {{!RFC5487}}, {{!RFC6655}}, {{!RFC7905}} and {{!RFC5469}} to remediate the above problems, by deprecating and discouraging the use of affected cipher suites, as listed in the appendices.
 
-{{BCP195}} contains the latest IETF recommendations for users of the (D)TLS protocol (and specifically, (D)TLS 1.2) and this
+BCP 195 {{RFC8996}}{{RFC9325}} contains the latest IETF recommendations for users of the (D)TLS protocol (and specifically, (D)TLS 1.2) and this
 document supersedes it in several points. {{update-9325}} details the exact differences.
 All other recommendations of the BCP document remain valid.
 
@@ -254,19 +254,19 @@ All other recommendations of the BCP document remain valid.
 Clients MUST NOT offer and servers MUST NOT select non-ephemeral FFDH cipher suites in (D)TLS 1.2 connections.
 (Note that (D)TLS 1.0 and TLS 1.1 are deprecated by {{!RFC8996}} and (D)TLS 1.3 does not
 support FFDH {{!I-D.ietf-tls-rfc8446bis}}{{!RFC9147}}.) This includes all cipher suites listed in the table in
-{{appendix-dh}}.
+{{dhcs}}.
 
 Clients SHOULD NOT offer and servers SHOULD NOT select non-ephemeral ECDH cipher suites in (D)TLS 1.2 connections. (This requirement is already present in {{!RFC9325}}.
 Note that (D)TLS 1.0 and TLS 1.1 are deprecated by {{!RFC8996}} and
 (D)TLS 1.3 does not support ECDH {{!I-D.ietf-tls-rfc8446bis}}{{!RFC9147}}.) This includes all cipher suites listed
-in the table in {{appendix-ecdh}}.
+in the table in {{ecdhcs}}.
 
-In addition, to avoid the use of non-ephemeral Diffie-Hellman, clients SHOULD NOT use and servers SHOULD NOT accept certificates with fixed DH parameters. These certificate types are rsa_fixed_dh, dss_fixed_dh, rsa_fixed_ecdh and ecdsa_fixed_ecdh as listed in {{appendix-cert}}. These values only apply to (D)TLS versions of 1.2 and below.
+In addition, to avoid the use of non-ephemeral Diffie-Hellman, clients SHOULD NOT use and servers SHOULD NOT accept certificates with fixed DH parameters. These certificate types are rsa_fixed_dh, dss_fixed_dh, rsa_fixed_ecdh and ecdsa_fixed_ecdh as listed in {{cert}}. These values only apply to (D)TLS versions of 1.2 and below.
 
 # Ephemeral Finite Field Diffie-Hellman {#dhe}
 
 Clients MUST NOT offer and servers MUST NOT select FFDHE cipher suites in (D)TLS 1.2 connections.
-This includes all cipher suites listed in the table in {{appendix-dhe}}.
+This includes all cipher suites listed in the table in {{dhecs}}.
 (Note that (D)TLS 1.0 and TLS 1.1 are deprecated by {{!RFC8996}}.) FFDHE cipher suites in (D)TLS 1.3 do not suffer from the problems presented in {{introduction}}; see {{!I-D.ietf-tls-rfc8446bis}} and {{!RFC9147}}. Therefore, clients and servers MAY offer FFDHE cipher suites in (D)TLS 1.3 connections.
 
 # RSA {#rsa}
@@ -274,66 +274,12 @@ This includes all cipher suites listed in the table in {{appendix-dhe}}.
 Clients MUST NOT offer and servers MUST NOT select RSA cipher suites in (D)TLS 1.2
 connections. (Note that (D)TLS 1.0 and TLS 1.1 are deprecated by {{!RFC8996}}, and (D)TLS
 1.3 does not support static RSA {{!I-D.ietf-tls-rfc8446bis}}{{!RFC9147}}.) This includes all cipher suites
-listed in the table in {{appendix-rsa}}. Note that these cipher suites are
+listed in the table in {{rsacs}}. Note that these cipher suites are
 already marked as not recommended in the "TLS Cipher Suites" registry.
 
-# IANA Considerations
+# Updates to Cipher Suites and TLS ClientCertificateType Identifiers
 
-This document requests IANA to mark the cipher suites from the "TLS Cipher Suites" registry, under “Transport Layer Security (TLS) Parameters” registry group, listed in {{appendix-dh}}, {{appendix-ecdh}}, {{appendix-dhe}}, {{appendix-rsa}}, and the certificate types from the "TLS ClientCertificateType Identifiers" registry listed in {{appendix-cert}} as "D" in the "Recommended" column, see {{!I-D.ietf-tls-rfc8447bis}}.
-
-For each registry entry in {{appendix-dh}}, {{appendix-ecdh}}, {{appendix-dhe}}, {{appendix-rsa}}, and {{appendix-cert}},
-IANA is also requested to update the registry entry's Reference column to refer to this document.
-
-# Security Considerations {#sec-considerations}
-
-Non-ephemeral finite field DH cipher suites (TLS_DH_\*), as well as ephemeral key reuse
-for finite field DH cipher suites, are prohibited due to the {{Raccoon}} attack. Both are
-already considered bad practice since they do not provide forward secrecy. However,
-Raccoon revealed that timing side channels in processing TLS premaster secrets may be
-exploited to reveal the encrypted premaster secret.
-
-As for non-ephemeral elliptic curve DH cipher suites (TLS_ECDH_\*), forgoing forward secrecy
-not only allows retroactive decryption in the event of key compromise but may
-also enable a broad category of attacks where the attacker exploits key reuse
-to repeatedly query a cryptographic secret.
-
-This category includes, but is not necessarily limited to, the following
-examples:
-
-1. Invalid curve attacks, where the attacker exploits key reuse to repeatedly
-query and eventually learn the key itself. These attacks have been shown to be
-practical against real-world TLS implementations {{ICA}}.
-
-2. Side channel attacks, where the attacker exploits key reuse and an additional
-side channel to learn a cryptographic secret. As one example of such attacks,
-refer to {{MAY4}}.
-
-3. Fault attacks, where the attacker exploits key reuse and incorrect
-calculations to learn a cryptographic secret. As one example of such attacks,
-see {{PARIS256}}.
-
-Such attacks are often implementation-dependent, including the above examples.
-However, these examples demonstrate that building a system that reuses keys and
-avoids this category of attacks is difficult in practice. In contrast, avoiding
-key reuse not only prevents decryption in the event of key compromise, but also
-precludes this category of attacks altogether. Therefore, this document
-discourages the reuse of elliptic curve DH public keys.
-
-As for ephemeral finite field Diffie-Hellman in (D)TLS 1.2 (TLS_DHE_\* and TLS_PSK_DHE_\*), as explained above, clients have no practical way to support these cipher suites while ensuring they only negotiate security parameters that are acceptable to them. In (D)TLS 1.2, the server chooses the Diffie-Hellman group, and custom groups are prevalent. Therefore, once the client includes these cipher suites in its handshake and the server presents a custom group, the client cannot complete the handshake while ensuring security. Verifying the group structure is prohibitively expensive for the client. Using a safelist of known-good groups is also impractical, since server operators were encouraged to generate their own custom group. Further, there is no mechanism for the handshake to fall back to other parameters, that are acceptable to both the client and server.
-
-# Acknowledgments
-
-This document includes many important contributions from Carrie Bartle, who wrote much of the prose, and presented it several times at the IETF TLS WG.
-
-The document was inspired by discussions on the TLS WG mailing list and
-a suggestion by Filippo Valsorda following the release of the {{Raccoon}} attack.
-Thanks to Christopher A. Wood for writing up the initial draft of this document.
-Thanks also to Thomas Fossati, Sean Turner, Joe Salowey, Yaron Sheffer, Christian Buchgraber, {{{John Preuß Mattsson}}} and {{{Manuel Pégourié-Gonnard}}} for
-comments and suggestions.
-
---- back
-
-# DH Cipher Suites Deprecated by This Document {#appendix-dh}
+## DH Cipher Suites Deprecated by This Document  {#dhcs}
 
 This document requests IANA to set the “recommended” column to “D” for the following entries:
 
@@ -402,7 +348,7 @@ This document requests IANA to set the “recommended” column to “D” for t
 | TLS_DH_anon_WITH_CAMELLIA_128_GCM_SHA256 | {{!RFC6367}} |
 | TLS_DH_anon_WITH_CAMELLIA_256_GCM_SHA384 | {{!RFC6367}} |
 
-# ECDH Cipher Suites Whose Use Is Discouraged by This Document {#appendix-ecdh}
+## ECDH Cipher Suites Whose Use Is Discouraged by This Document {#ecdhcs}
 
 {{RFC9325}} already specifies that implementations SHOULD NOT negotiate the following cipher suites; accordingly, they appear with “Recommended: N” in the IANA TLS Cipher Suites registry. This document updates neither the former guidance nor the registry status. Rather, it records the rationale for discouraging use of these cipher suites, and cites prior analyses and attacks that demonstrate the associated risks.
 
@@ -448,7 +394,7 @@ This document requests IANA to set the “recommended” column to “D” for t
 | TLS_ECDH_RSA_WITH_CAMELLIA_128_GCM_SHA256 | {{!RFC6367}} |
 | TLS_ECDH_RSA_WITH_CAMELLIA_256_GCM_SHA384 | {{!RFC6367}} |
 
-# DHE Cipher Suites deprecated by This Document {#appendix-dhe}
+## DHE Cipher Suites deprecated by This Document {#dhecs}
 
 | Ciphersuite  | Reference |
 |:-|:-|
@@ -522,7 +468,7 @@ This document requests IANA to set the “recommended” column to “D” for t
 | TLS_PSK_DHE_WITH_AES_128_CCM_8 | {{!RFC6655}} |
 | TLS_PSK_DHE_WITH_AES_256_CCM_8 | {{!RFC6655}} |
 
-# RSA Cipher Suites Deprecated by This Document {#appendix-rsa}
+## RSA Cipher Suites Deprecated by This Document {#rsacs}
 
 | Ciphersuite  | Reference |
 |:-|:-|
@@ -579,7 +525,7 @@ This document requests IANA to set the “recommended” column to “D” for t
 | TLS_RSA_WITH_AES_256_CCM_8 | {{!RFC6655}} |
 | TLS_RSA_PSK_WITH_CHACHA20_POLY1305_SHA256 | {{!RFC7905}} |
 
-# TLS ClientCertificateType Identifiers Deprecated by This Document {#appendix-cert}
+## TLS ClientCertificateType Identifiers Deprecated by This Document {#cert}
 
 | Certificate Type  | Reference |
 |:-|:-|
@@ -604,3 +550,63 @@ the table below lists the exact changes. All changes should be made in Section 4
 | Ephemeral FFDH | SHOULD NOT | MUST NOT |
 | Static RSA | SHOULD NOT | MUST NOT |
 |---------+---------+---------|
+
+
+# IANA Considerations
+
+This document requests IANA to mark the cipher suites from the "TLS Cipher Suites" registry, under “Transport Layer Security (TLS) Parameters” registry group, listed in {{dhcs}}, {{ecdhcs}}, {{dhecs}}, {{rsacs}}, and the certificate types from the "TLS ClientCertificateType Identifiers" registry listed in {{cert}} as "D" in the "Recommended" column, see {{!I-D.ietf-tls-rfc8447bis}}.
+
+For each registry entry in {{dhcs}}, {{ecdhcs}}, {{dhecs}}, {{rsacs}}, and {{cert}},
+IANA is also requested to update the registry entry's Reference column to refer to this document.
+
+# Security Considerations {#sec-considerations}
+
+Non-ephemeral finite field DH cipher suites (TLS_DH_\*), as well as ephemeral key reuse
+for finite field DH cipher suites, are prohibited due to the {{Raccoon}} attack. Both are
+already considered bad practice since they do not provide forward secrecy. However,
+Raccoon revealed that timing side channels in processing TLS premaster secrets may be
+exploited to reveal the encrypted premaster secret.
+
+As for non-ephemeral elliptic curve DH cipher suites (TLS_ECDH_\*), forgoing forward secrecy
+not only allows retroactive decryption in the event of key compromise but may
+also enable a broad category of attacks where the attacker exploits key reuse
+to repeatedly query a cryptographic secret.
+
+This category includes, but is not necessarily limited to, the following
+examples:
+
+1. Invalid curve attacks, where the attacker exploits key reuse to repeatedly
+query and eventually learn the key itself. These attacks have been shown to be
+practical against real-world TLS implementations {{ICA}}.
+
+2. Side channel attacks, where the attacker exploits key reuse and an additional
+side channel to learn a cryptographic secret. As one example of such attacks,
+refer to {{MAY4}}.
+
+3. Fault attacks, where the attacker exploits key reuse and incorrect
+calculations to learn a cryptographic secret. As one example of such attacks,
+see {{PARIS256}}.
+
+Such attacks are often implementation-dependent, including the above examples.
+However, these examples demonstrate that building a system that reuses keys and
+avoids this category of attacks is difficult in practice. In contrast, avoiding
+key reuse not only prevents decryption in the event of key compromise, but also
+precludes this category of attacks altogether. Therefore, this document
+discourages the reuse of elliptic curve DH public keys.
+
+As for ephemeral finite field Diffie-Hellman in (D)TLS 1.2 (TLS_DHE_\* and TLS_PSK_DHE_\*), as explained above, clients have no practical way to support these cipher suites while ensuring they only negotiate security parameters that are acceptable to them. In (D)TLS 1.2, the server chooses the Diffie-Hellman group, and custom groups are prevalent. Therefore, once the client includes these cipher suites in its handshake and the server presents a custom group, the client cannot complete the handshake while ensuring security. Verifying the group structure is prohibitively expensive for the client. Using a safelist of known-good groups is also impractical, since server operators were encouraged to generate their own custom group. Further, there is no mechanism for the handshake to fall back to other parameters, that are acceptable to both the client and server.
+
+# Acknowledgments
+
+This document includes many important contributions from Carrie Bartle, who wrote much of the prose, and presented it several times at the IETF TLS WG.
+
+The document was inspired by discussions on the TLS WG mailing list and
+a suggestion by Filippo Valsorda following the release of the {{Raccoon}} attack.
+Thanks to Christopher A. Wood for writing up the initial draft of this document.
+Thanks also to Thomas Fossati, Sean Turner, Joe Salowey, Yaron Sheffer, Christian Buchgraber, {{{John Preuß Mattsson}}} and {{{Manuel Pégourié-Gonnard}}} for
+comments and suggestions.
+
+--- back
+
+
+
