@@ -167,7 +167,7 @@ algorithm or does not share the relevant configuration options.
 (There is no DTLS version 1.1.)
 
 This document updates RFCs 9325, 4346, 5246, 4162, 6347, 5932, 5288, 6209, 6367, 8422, 5289, 5469, 4785, 4279, 5487, 6655, and 7905,
-to deprecate or discourage - i.e., change to MUST NOT or SHOULD NOT, as listed in the appendices - the use of cipher suites using the above key exchange methods in (D)TLS 1.2 connections.
+to deprecate or discourage - i.e., change to MUST NOT or SHOULD NOT, as listed in {{dhecs}} {{ecdhcs}} {{dhecs}} {{rsacs}} {{cert}} - the use of cipher suites using the above key exchange methods in (D)TLS 1.2 connections.
 
 --- middle
 
@@ -239,7 +239,7 @@ Bleichenbacher's attack would affect all endpoints sharing the same RSA key (see
 
 This document updates {{!RFC9325}}, {{!RFC4346}}, {{!RFC5246}},
 {{!RFC4162}}, {{!RFC6347}}, {{!RFC5932}}, {{!RFC5288}}, {{!RFC6209}}, {{!RFC6367}},
-{{!RFC8422}}, {{!RFC5289}}, {{!RFC4785}}, {{!RFC4279}}, {{!RFC5487}}, {{!RFC6655}}, {{!RFC7905}} and {{!RFC5469}} to remediate the above problems, by deprecating and discouraging the use of affected cipher suites, as listed in the appendices.
+{{!RFC8422}}, {{!RFC5289}}, {{!RFC4785}}, {{!RFC4279}}, {{!RFC5487}}, {{!RFC6655}}, {{!RFC7905}} and {{!RFC5469}} to remediate the above problems, by deprecating and discouraging the use of affected cipher suites, as listed in {{dhecs}} {{ecdhcs}} {{dhecs}} {{rsacs}} {{cert}}.
 
 BCP 195 {{RFC8996}}{{RFC9325}} contains the latest IETF recommendations for users of the (D)TLS protocol (and specifically, (D)TLS 1.2) and this
 document supersedes it in several points. {{update-9325}} details the exact differences.
