@@ -350,7 +350,7 @@ This document requests IANA to set the “recommended” column to “D” for t
 
 ## ECDH Cipher Suites Whose Use Is Discouraged by This Document {#ecdhcs}
 
-{{RFC9325}} already specifies that implementations SHOULD NOT negotiate the following cipher suites; accordingly, they appear with "Recommended: N" in the IANA TLS Cipher Suites registry {{tls-registry}}. This document updates them to "Recommended: D" to align with {{RFC8447bis}}. It also records the rationale for discouraging use of these cipher suites, and cites prior analyses and attacks that demonstrate the associated risks.
+{{RFC9325}} already specifies that implementations SHOULD NOT negotiate the following cipher suites; accordingly, they appear with "Recommended: N" in the IANA TLS Cipher Suites registry {{tls-registry}}. This document updates them to "Recommended: D" to align with {{!I-D.ietf-tls-rfc8447bis}}. It also records the rationale for discouraging use of these cipher suites, and cites prior analyses and attacks that demonstrate the associated risks.
 
 | Ciphersuite  | Reference |
 |:-|:-|
