@@ -396,6 +396,8 @@ This document requests IANA to set the “recommended” column to “D” for t
 
 ## DHE Cipher Suites deprecated by This Document {#dhecs}
 
+This document requests IANA to set the “recommended” column to “D” for the following entries:
+
 | Ciphersuite  | Reference |
 |:-|:-|
 | TLS_DHE_DSS_EXPORT_WITH_DES40_CBC_SHA | {{!RFC4346}} |
@@ -470,6 +472,8 @@ This document requests IANA to set the “recommended” column to “D” for t
 
 ## RSA Cipher Suites Deprecated by This Document {#rsacs}
 
+This document requests IANA to set the “recommended” column to “D” for the following entries:
+
 | Ciphersuite  | Reference |
 |:-|:-|
 | TLS_RSA_WITH_NULL_MD5 | {{!RFC5246}} |
@@ -526,6 +530,8 @@ This document requests IANA to set the “recommended” column to “D” for t
 | TLS_RSA_PSK_WITH_CHACHA20_POLY1305_SHA256 | {{!RFC7905}} |
 
 ## TLS ClientCertificateType Identifiers Deprecated by This Document {#cert}
+
+This document requests IANA to set the “recommended” column to “D” for the following entries:
 
 | Certificate Type  | Reference |
 |:-|:-|
