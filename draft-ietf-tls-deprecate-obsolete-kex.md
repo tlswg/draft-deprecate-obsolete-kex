@@ -163,11 +163,11 @@ cipher suites.
 
 These prescriptions apply only to (D)TLS 1.2 since (D)TLS 1.0 and TLS 1.1 are
 deprecated by RFC 8996 and (D)TLS 1.3 either does not use the affected
-algorithm or does not share the relevant configuration options.
+algorithms or does not share the relevant configuration options.
 (There is no DTLS version 1.1.)
 
 This document updates RFCs 9325, 4346, 5246, 4162, 6347, 5932, 5288, 6209, 6367, 8422, 5289, 5469, 4785, 4279, 5487, 6655, and 7905,
-to deprecate or discourage - i.e., change to MUST NOT or SHOULD NOT, as listed in {{dhecs}} {{ecdhcs}} {{dhecs}} {{rsacs}} {{cert}} - the use of cipher suites using the above key exchange methods in (D)TLS 1.2 connections.
+to deprecate or discourage - i.e., change to MUST NOT or SHOULD NOT, as listed in {{dhecs}}, {{ecdhcs}}, {{dhecs}}, {{rsacs}}, and {{cert}} - the use of cipher suites using the above key exchange methods in (D)TLS 1.2 connections.
 
 --- middle
 
